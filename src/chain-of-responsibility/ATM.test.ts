@@ -37,6 +37,25 @@ describe("ATM functionality", () => {
       }
     });
 
+    test("Revert if amount cannot be withdrawn with current bills", () => {
+      atm.withdraw(300);
+      expect(atm.getTotal()).toBe(0);
+
+      const bills = {
+        [Bill.FIFTY]: 2,
+        [Bill.TWENTY]: 0,
+        [Bill.TEN]: 0,
+      };
+      atm.fill(bills);
+      const withdrawAmount = 90;
+
+      try {
+        atm.withdraw(withdrawAmount);
+      } catch (e: unknown) {
+        expect((e as Error).message).toBe("Could not process request");
+      }
+    });
+
     test("Successful withdrawals return proper actions", () => {
       expect(atm.getTotal()).toBe(300);
 
