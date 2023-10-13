@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "test": "jest",
-    "dev": "tsc && node build/abstract-factory/index.js"
+    "dev": "tsc && node build/fp/index.js"
   },
   "repository": {
     "type": "git",
