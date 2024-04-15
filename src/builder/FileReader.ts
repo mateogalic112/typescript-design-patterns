@@ -1,10 +1,12 @@
 import fs from "fs";
 
+export type Preprocessor = (data: string) => string;
+
 export class FileReader {
   constructor(
     private filePath: string,
     private encoding: BufferEncoding,
-    private preprocessors: Array<(data: string) => string>
+    private preprocessors: Array<Preprocessor>
   ) {}
 
   async readAndProcess(): Promise<string> {

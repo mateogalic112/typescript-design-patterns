@@ -28,6 +28,8 @@ export class FileReaderBuilder implements IFileReaderBuilder {
   }
 
   build(): FileReader {
+    if (!this.filePath) throw new Error("File path is required");
+
     return new FileReader(this.filePath, this.encoding, this.preprocessors);
   }
 }

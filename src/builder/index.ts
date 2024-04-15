@@ -1,3 +1,4 @@
+import { Preprocessor } from "./FileReader";
 import { FileReaderBuilder } from "./FileReaderBuilder";
 
 function main() {
@@ -8,10 +9,10 @@ function main() {
 
   const textEncoding = "utf-8";
 
-  const toUpperCase = (data: string) => data.toUpperCase();
+  const toUpperCase: Preprocessor = (data: string) => data.toUpperCase();
 
   const removeUppercaseWordsRegex = /\b[A-Z]+\b/g;
-  const removeUppercaseWords = (data: string) =>
+  const removeUppercaseWords: Preprocessor = (data: string) =>
     data.replace(removeUppercaseWordsRegex, "");
 
   const fileReader = fileReaderBuilder
