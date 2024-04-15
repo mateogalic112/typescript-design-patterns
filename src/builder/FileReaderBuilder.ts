@@ -1,4 +1,4 @@
-import { FileReader } from "./FileReader";
+import { FileReader, Preprocessor } from "./FileReader";
 
 interface IFileReaderBuilder {
   setFilePath(path: string): IFileReaderBuilder;
@@ -10,7 +10,7 @@ interface IFileReaderBuilder {
 export class FileReaderBuilder implements IFileReaderBuilder {
   private filePath: string = "";
   private encoding: BufferEncoding = "utf-8";
-  private preprocessors: ((data: string) => string)[] = [];
+  private preprocessors: Preprocessor[] = [];
 
   setFilePath(path: string): IFileReaderBuilder {
     this.filePath = path;
