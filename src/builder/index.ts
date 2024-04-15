@@ -4,20 +4,14 @@ import { FileReaderBuilder } from "./FileReaderBuilder";
 function main() {
   const fileReaderBuilder = new FileReaderBuilder();
 
-  const root = "./src/builder";
-  const fileName = "test.txt";
-
-  const textEncoding = "utf-8";
-
   const toUpperCase: Preprocessor = (data: string) => data.toUpperCase();
 
-  const removeUppercaseWordsRegex = /\b[A-Z]+\b/g;
   const removeUppercaseWords: Preprocessor = (data: string) =>
-    data.replace(removeUppercaseWordsRegex, "");
+    data.replace(/\b[A-Z]+\b/g, "");
 
   const fileReader = fileReaderBuilder
-    .setFilePath(`${root}/${fileName}`)
-    .setEncoding(textEncoding)
+    .setFilePath("./src/builder/test.txt")
+    .setEncoding("utf-8")
     .addPreprocessor(removeUppercaseWords)
     .addPreprocessor(toUpperCase)
     .build();
