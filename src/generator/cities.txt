@@ -1,0 +1,10 @@
+Berlin - 3,645,000
+Tokyo - 13,960,000
+New York City - 8,336,000
+London - 8,982,000
+Paris - 2,148,000
+Mexico City - 9,209,000
+Mumbai - 12,442,000
+São Paulo - 12,325,000
+Cairo - 9,500,000
+Los Angeles - 3,979,000

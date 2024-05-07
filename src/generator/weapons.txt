@@ -1,0 +1,10 @@
+AK-47 - 100 damage
+Longsword - 55 damage
+Crossbow - 75 damage
+Machete - 45 damage
+RPG-7 (Rocket-Propelled Grenade) - 150 damage
+Combat Knife - 35 damage
+Flamethrower - 80 damage
+Compound Bow - 65 damage
+M4 Carbine - 95 damage
+Morning Star (Medieval Mace) - 60 damage
