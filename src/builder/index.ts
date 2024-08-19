@@ -7,7 +7,7 @@ function main() {
   const toUpperCase: Preprocessor = (data: string) => data.toUpperCase();
 
   const removeUppercaseWords: Preprocessor = (data: string) =>
-    data.replace(/\b[A-Z]+\b/g, "");
+    data.replace(/\b[A-Z]+\b/g, "").trim();
 
   const fileReader = fileReaderBuilder
     .setFilePath("./src/builder/test.txt")
