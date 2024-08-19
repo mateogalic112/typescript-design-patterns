@@ -10,19 +10,14 @@ export class FileReader {
   ) {}
 
   async readAndProcess(): Promise<string> {
-    try {
-      let data = await fs.promises.readFile(this.filePath, {
-        encoding: this.encoding,
-      });
+    let data = await fs.promises.readFile(this.filePath, {
+      encoding: this.encoding,
+    });
 
-      this.preprocessors.forEach((processor) => {
-        data = processor(data);
-      });
+    this.preprocessors.forEach((processor) => {
+      data = processor(data);
+    });
 
-      return data;
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
+    return data;
   }
 }
