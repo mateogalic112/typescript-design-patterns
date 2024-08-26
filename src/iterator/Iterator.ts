@@ -17,6 +17,7 @@ export class Iterator<T> implements IIterator<T> {
 
     const item = this.items[this.index];
     this.index += 1;
+
     return item;
   }
 

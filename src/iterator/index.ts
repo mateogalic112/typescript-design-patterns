@@ -2,13 +2,13 @@ import { Iterator } from "./Iterator";
 import { Weapon } from "./Weapon";
 
 function main() {
-  const weaponArsenal = [
+  const arsenal = [
     new Weapon("AK-47"),
     new Weapon("M4A1"),
     new Weapon("AWP"),
   ];
 
-  const weapons = new Iterator<Weapon>(weaponArsenal);
+  const weapons = new Iterator<Weapon>(arsenal);
 
   while (weapons.hasNext()) {
     weapons.next().fire();
