@@ -1,17 +1,11 @@
-// The Iterator Pattern Concept
-
 interface IIterator<T> {
-  // Return the object in collection
   next(): T;
-
-  // Returns Boolean whether at end of collection or not
   hasNext(): boolean;
 }
 
 export class Iterator<T> implements IIterator<T> {
-  // The concrete iterator (iterable)
-  index: number;
   items: T[];
+  index: number;
 
   constructor(items: T[]) {
     this.index = 0;
