@@ -5,20 +5,16 @@ export enum Bill {
   TWENTY = 20,
   FIFTY = 50,
 }
+
 export class DollarBill extends AmountHandler {
   constructor(private readonly bill: Bill, private quantity: number) {
     super();
   }
 
   handle({ amount, actions }: HandleArgs) {
-    if (this.quantity === 0) {
+    if (this.quantity === 0 || amount < this.bill) {
       return super.handle({ amount, actions });
     }
-
-    if (amount < this.bill) {
-      return super.handle({ amount, actions });
-    }
-
     return this.processWithdraw({ amount, actions });
   }
 
@@ -50,6 +46,7 @@ export class DollarBill extends AmountHandler {
         actions: newActions,
       });
     }
+
     return newActions;
   }
 }
