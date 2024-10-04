@@ -20,11 +20,9 @@ export class ATM {
   }
 
   private calculateTotal(bills: Record<Bill, number>) {
-    return Object.entries(bills).reduce((total, bill) => {
-      const billValue: number = +bill[0];
-      const billQuantity: number = bill[1];
-      return total + billValue * billQuantity;
-    }, this.totalAmount);
+    return Object.entries(bills).reduce((total, [bill, quantity]) => {
+      return total + +bill * quantity;
+    }, 0);
   }
 
   public withdraw(amount: number) {
