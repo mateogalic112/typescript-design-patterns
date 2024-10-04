@@ -1,5 +1,5 @@
 import { ATM } from "./ATM";
-import { Bill } from "./types";
+import { Bill } from "./DollarBill";
 
 describe("ATM functionality", () => {
   let atm: ATM;
@@ -62,21 +62,21 @@ describe("ATM functionality", () => {
       const withdrawAmount = 130;
       const result = atm.withdraw(withdrawAmount);
       expect(result).toMatchObject([
-        `Dispensing 2 £50 bill`,
-        `Dispensing 1 £20 bill`,
-        `Dispensing 1 £10 bill`,
+        `Dispensing 2 $50 bill`,
+        `Dispensing 1 $20 bill`,
+        `Dispensing 1 $10 bill`,
       ]);
 
       const withdrawAmount2 = 100;
       const result2 = atm.withdraw(withdrawAmount2);
       expect(result2).toMatchObject([
-        `Dispensing 4 £20 bill`,
-        `Dispensing 2 £10 bill`,
+        `Dispensing 4 $20 bill`,
+        `Dispensing 2 $10 bill`,
       ]);
 
       const withdrawAmount3 = 60;
       const result3 = atm.withdraw(withdrawAmount3);
-      expect(result3).toMatchObject([`Dispensing 6 £10 bill`]);
+      expect(result3).toMatchObject([`Dispensing 6 $10 bill`]);
 
       expect(atm.getTotal()).toBe(10);
     });

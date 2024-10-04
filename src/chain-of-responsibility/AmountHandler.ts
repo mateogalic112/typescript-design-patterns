@@ -1,4 +1,12 @@
-import { HandleArgs, Handler } from "./types";
+export type HandleArgs = {
+  amount: number;
+  actions: string[];
+};
+
+interface Handler {
+  setNext(handler: Handler): Handler;
+  handle(args: HandleArgs): void;
+}
 
 export abstract class AmountHandler implements Handler {
   constructor(protected nextHandler: Handler | null = null) {}

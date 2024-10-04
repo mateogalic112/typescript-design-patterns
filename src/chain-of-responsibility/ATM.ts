@@ -1,12 +1,11 @@
-import { DollarBill } from "./DollarBill";
-import { Bill } from "./types";
+import { Bill, DollarBill } from "./DollarBill";
 
 export class ATM {
   constructor(
-    private totalAmount = 0,
     private fiftyDollarBill = new DollarBill(Bill.FIFTY, 0),
     private twentyDollarBill = new DollarBill(Bill.TWENTY, 0),
-    private tenDollarBill = new DollarBill(Bill.TEN, 0)
+    private tenDollarBill = new DollarBill(Bill.TEN, 0),
+    private totalAmount = 0
   ) {
     this.fiftyDollarBill
       .setNext(this.twentyDollarBill)
@@ -41,6 +40,7 @@ export class ATM {
     // process the request
     const result = this.fiftyDollarBill.handle({ amount, actions: [] });
     this.setTotal(this.totalAmount - amount);
+
     return result;
   }
 

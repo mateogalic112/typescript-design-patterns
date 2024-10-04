@@ -1,55 +1,42 @@
-import { AmountHandler } from "./AmountHandler";
-import { Bill, HandleArgs } from "./types";
+import { AmountHandler, HandleArgs } from "./AmountHandler";
 
+export enum Bill {
+  TEN = 10,
+  TWENTY = 20,
+  FIFTY = 50,
+}
 export class DollarBill extends AmountHandler {
   constructor(private readonly bill: Bill, private quantity: number) {
     super();
   }
 
   handle({ amount, actions }: HandleArgs) {
-    if (this.quantity === 0) {
+    if (this.quantity === 0 || amount < this.bill) {
       return super.handle({ amount, actions });
     }
-
-    if (amount < this.bill) {
-      return super.handle({ amount, actions });
-    }
-
-    const requiredBillCount = Math.floor(amount / this.bill);
-    if (requiredBillCount > this.quantity) {
-      return this.processWithdrawWithInsufficientBills({ amount, actions });
-    }
-
-    return this.processWithdraw({ amount, actions, requiredBillCount });
+    return this.processWithdraw({ amount, actions });
   }
 
   public setQuantity(qtyAmount: number) {
     this.quantity = qtyAmount;
   }
 
-  private processWithdrawWithInsufficientBills({
-    amount,
-    actions,
-  }: HandleArgs) {
-    const newAction = `Dispensing ${this.quantity} £${this.bill} bill`;
+  private processWithdraw({ amount, actions }: HandleArgs) {
+    const requiredBillCount = Math.floor(amount / this.bill);
+    const dispenseAmount = Math.min(requiredBillCount, this.quantity);
+
+    const newAction = `Dispensing ${dispenseAmount} $${this.bill} bill`;
     const newActions = [...actions, newAction];
 
-    const remainder = amount - this.quantity * this.bill;
+    if (requiredBillCount > this.quantity) {
+      const remainder = amount - this.quantity * this.bill;
+      this.setQuantity(0);
 
-    this.setQuantity(0);
-    return super.handle({
-      amount: remainder,
-      actions: newActions,
-    });
-  }
-
-  private processWithdraw({
-    amount,
-    actions,
-    requiredBillCount,
-  }: HandleArgs & { requiredBillCount: number }) {
-    const newAction = `Dispensing ${requiredBillCount} £${this.bill} bill`;
-    const newActions = [...actions, newAction];
+      return super.handle({
+        amount: remainder,
+        actions: newActions,
+      });
+    }
 
     this.setQuantity(this.quantity - requiredBillCount);
 

@@ -1,5 +1,5 @@
 import { ATM } from "./ATM";
-import { Bill } from "./types";
+import { Bill } from "./DollarBill";
 
 function main() {
   const atm = new ATM();
@@ -11,14 +11,9 @@ function main() {
   });
 
   try {
-    const atmPreTotal = atm.getTotal();
-    console.log({ atmPreTotal });
-
-    const result = atm.withdraw(330);
-    console.log({ result });
-
-    const atmPostTotal = atm.getTotal();
-    console.log({ atmPostTotal });
+    console.log({ atmPreTotal: atm.getTotal() });
+    console.log({ result: atm.withdraw(330) });
+    console.log({ atmPostTotal: atm.getTotal() });
   } catch (e) {
     console.log(e);
   }
