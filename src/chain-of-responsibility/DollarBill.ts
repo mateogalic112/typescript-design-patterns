@@ -11,9 +11,14 @@ export class DollarBill extends AmountHandler {
   }
 
   handle({ amount, actions }: HandleArgs) {
-    if (this.quantity === 0 || amount < this.bill) {
+    if (this.quantity === 0) {
       return super.handle({ amount, actions });
     }
+
+    if (amount < this.bill) {
+      return super.handle({ amount, actions });
+    }
+
     return this.processWithdraw({ amount, actions });
   }
 
@@ -31,7 +36,6 @@ export class DollarBill extends AmountHandler {
     if (requiredBillCount > this.quantity) {
       const remainder = amount - this.quantity * this.bill;
       this.setQuantity(0);
-
       return super.handle({
         amount: remainder,
         actions: newActions,
@@ -39,7 +43,6 @@ export class DollarBill extends AmountHandler {
     }
 
     this.setQuantity(this.quantity - requiredBillCount);
-
     const remainder = amount % this.bill;
     if (remainder !== 0) {
       return super.handle({

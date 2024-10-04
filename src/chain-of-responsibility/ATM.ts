@@ -23,7 +23,6 @@ export class ATM {
     return Object.entries(bills).reduce((total, bill) => {
       const billValue: number = +bill[0];
       const billQuantity: number = bill[1];
-
       return total + billValue * billQuantity;
     }, this.totalAmount);
   }
@@ -39,16 +38,12 @@ export class ATM {
 
     // process the request
     const result = this.fiftyDollarBill.handle({ amount, actions: [] });
-    this.setTotal(this.totalAmount - amount);
+    this.totalAmount -= amount;
 
     return result;
   }
 
   public getTotal() {
     return this.totalAmount;
-  }
-
-  private setTotal(newTotal: number) {
-    this.totalAmount = newTotal;
   }
 }
