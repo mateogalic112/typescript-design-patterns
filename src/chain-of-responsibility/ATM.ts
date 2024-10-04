@@ -30,7 +30,7 @@ export class ATM {
       throw new Error("ATM insufficient funds");
     }
 
-    if (amount < Bill.TEN || amount % Bill.TEN != 0) {
+    if (amount < Bill.TEN || amount % Bill.TEN !== 0) {
       throw new Error("Invalid input amount");
     }
 
