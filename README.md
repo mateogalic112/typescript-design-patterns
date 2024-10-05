@@ -1,4 +1,3 @@
-
 # TypeScript Design Patterns for Senior Developers
 
 ## Real world use-cases
