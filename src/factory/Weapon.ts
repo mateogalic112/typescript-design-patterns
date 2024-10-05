@@ -1,16 +1,5 @@
-interface IWeaponBase {
-  name: string;
-  damage: number;
-}
-
 export class Weapon {
-  private name: string;
-  private damage: number;
-
-  constructor({ name, damage }: IWeaponBase) {
-    this.name = name;
-    this.damage = damage;
-  }
+  constructor(private name: string, private damage: number) {}
 
   getInfo() {
     return `${this.name} with damage ${this.damage}`;

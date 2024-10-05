@@ -4,12 +4,15 @@ export class Battle {
   constructor(
     private warriorOne: Warrior,
     private warriorTwo: Warrior,
-    private attackTurn: number = 0,
+    private attackTurn: number = Math.random() > 0.5 ? 0 : 1,
     private messages: string[] = []
   ) {}
 
   start() {
-    while (this.warriorOne.getHealth() > 0 && this.warriorTwo.getHealth() > 0) {
+    while (
+      this.warriorOne.getHealth() > 0 &&
+      this.warriorTwo.getHealth() > 0
+    ) {
       if (this.attackTurn % 2 === 0) {
         this.attackOpponent(this.warriorOne, this.warriorTwo);
       } else {
@@ -21,7 +24,9 @@ export class Battle {
   private attackOpponent(attacker: Warrior, defender: Warrior) {
     const damage = attacker.attack();
     defender.receiveDamage(damage);
-    this.messages.push(`${attacker.getName()} attacks with ${damage} damage.`);
+    this.messages.push(
+      `${attacker.getName()} attacks with ${damage} damage.`
+    );
 
     if (defender.getHealth() === 0) {
       this.messages.push(
@@ -32,8 +37,8 @@ export class Battle {
         `${defender.getName()} has ${defender.getHealth()} health remaining`
       );
     }
-    this.messages.push("-------------------");
 
+    this.messages.push("-------------------");
     this.attackTurn++;
   }
 

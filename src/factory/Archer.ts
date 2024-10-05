@@ -9,7 +9,7 @@ export class Archer extends Warrior {
       name: "Archer",
       strength: 100,
       health: 1000,
-      weapon: new Weapon({ name: "Bow with Arrows", damage: 100 }),
+      weapon: new Weapon("Bow with Arrows", 100),
     });
 
     this.arrowsCount = arrowsCount;
@@ -17,6 +17,7 @@ export class Archer extends Warrior {
 
   attack() {
     if (this.arrowsCount === 0) return 50;
+
     this.arrowsCount--;
     return this.strength + this.weapon.attack();
   }

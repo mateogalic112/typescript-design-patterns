@@ -9,7 +9,7 @@ export class Knight extends Warrior {
       name: "Knight",
       strength: 100,
       health: 1000,
-      weapon: new Weapon({ name: "Sword", damage: 100 }),
+      weapon: new Weapon("Sword", 100),
     });
 
     this.stamina = stamina;
@@ -17,6 +17,7 @@ export class Knight extends Warrior {
 
   attack() {
     if (this.stamina === 0) return 50;
+
     this.stamina--;
     return this.strength + this.weapon.attack();
   }
