@@ -1,7 +1,7 @@
-import { AbstractFactory, MageFactory, WarriorFactory } from "./Factories";
+import { AbstractFactory, MageFactory, KnightFactory } from "./Factories";
 
 function main() {
-  function clientCode(factory: AbstractFactory) {
+  function createWarrior(factory: AbstractFactory) {
     const weapon = factory.createWeapon();
     const armor = factory.createArmor();
 
@@ -9,8 +9,8 @@ function main() {
     console.log(armor.protect());
   }
 
-  clientCode(new WarriorFactory());
-  clientCode(new MageFactory());
+  createWarrior(new KnightFactory());
+  createWarrior(new MageFactory());
 }
 
 main();

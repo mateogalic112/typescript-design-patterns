@@ -6,7 +6,7 @@ export interface AbstractFactory {
   createArmor(): Armor;
 }
 
-export class WarriorFactory implements AbstractFactory {
+export class KnightFactory implements AbstractFactory {
   public createWeapon(): Weapon {
     return new Sword();
   }
