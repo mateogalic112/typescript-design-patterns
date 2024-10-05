@@ -1,38 +1,40 @@
-import { Observer, Subject } from "./types";
+export interface Observer {
+  notify(data: Subject): void;
+}
+
+export interface Subject {
+  subscribe(observer: Observer): void;
+  unsubscribe(observer: Observer): void;
+  notify(): void;
+}
 
 export class AuctionManager implements Subject {
   private observers: Observer[] = [];
-  private latestBidder = "";
-  private latestBid = 0;
+  private latestBid = {
+    bidder: "",
+    amount: 0,
+  };
 
-  registerObserver(observer: Observer): void {
+  subscribe(observer: Observer): void {
     this.observers.push(observer);
   }
 
-  removeObserver(observer: Observer): void {
-    const index = this.observers.indexOf(observer);
-    if (index === -1) return;
-
-    this.observers.splice(index, 1);
+  unsubscribe(observer: Observer): void {
+    this.observers = this.observers.filter((o) => observer !== o);
   }
 
-  notifyObservers(): void {
+  notify(): void {
     this.observers.forEach((observer) => observer.notify(this));
   }
 
   placeBid(amount: number, bidder: string): void {
-    if (amount > this.latestBid) {
-      this.latestBid = amount;
-      this.latestBidder = bidder;
-      this.notifyObservers();
+    if (amount > this.latestBid.amount) {
+      this.latestBid = { bidder, amount };
+      this.notify();
     }
   }
 
-  getLatestBid(): number {
+  getLatestBid() {
     return this.latestBid;
-  }
-
-  getLatestBidder(): string {
-    return this.latestBidder;
   }
 }

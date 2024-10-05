@@ -1,20 +1,14 @@
-import { AuctionManager } from "./AuctionManager";
-import { Observer, Subject } from "./types";
+import { AuctionManager, Observer } from "./AuctionManager";
 
 export class Bidder implements Observer {
   constructor(private name: string) {}
 
-  notify(subject: Subject): void {
-    if (subject instanceof AuctionManager) {
-      console.log(
-        `Latest bid -> ${subject.getLatestBidder()} - ${subject.getLatestBid()}$`
-      );
-    }
+  notify(subject: AuctionManager) {
+    const { bidder, amount } = subject.getLatestBid();
+    console.log(`Latest bid -> ${bidder} - ${amount}$`);
   }
 
-  placeBid(subject: Subject, amount: number): void {
-    if (subject instanceof AuctionManager) {
-      subject.placeBid(amount, this.name);
-    }
+  placeBid(subject: AuctionManager, amount: number) {
+    subject.placeBid(amount, this.name);
   }
 }

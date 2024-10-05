@@ -6,16 +6,14 @@ function main() {
 
   const bob = new Bidder("Bob");
   const alice = new Bidder("Alice");
-  const john = new Bidder("John");
 
-  auctionManager.registerObserver(bob);
-  auctionManager.registerObserver(alice);
-  auctionManager.registerObserver(john);
+  auctionManager.subscribe(bob);
+  auctionManager.subscribe(alice);
 
   bob.placeBid(auctionManager, 100);
   alice.placeBid(auctionManager, 200);
 
-  auctionManager.removeObserver(john);
+  auctionManager.unsubscribe(bob);
   bob.placeBid(auctionManager, 300);
 }
 
