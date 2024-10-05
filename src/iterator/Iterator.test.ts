@@ -12,7 +12,7 @@ describe("Iterator functionality", () => {
     const weapons = new Iterator<Weapon>(arsenal);
 
     while (weapons.hasNext()) {
-      weapons.next().fire();
+      weapons.next();
     }
 
     expect(weapons.index).toBe(arsenal.length);
@@ -23,7 +23,7 @@ describe("Iterator functionality", () => {
     const weapons = new Iterator<Weapon>(arsenal);
 
     while (weapons.hasNext()) {
-      weapons.next().fire();
+      weapons.next();
     }
 
     expect(() => weapons.next()).toThrowError("At End of Iterator");
