@@ -11,15 +11,15 @@ export class DollarBill extends AmountHandler {
     super();
   }
 
+  public setQuantity(qtyAmount: number) {
+    this.quantity = qtyAmount;
+  }
+
   handle({ amount, actions }: HandleArgs) {
     if (this.quantity === 0 || amount < this.bill) {
       return super.handle({ amount, actions });
     }
     return this.processWithdraw({ amount, actions });
-  }
-
-  public setQuantity(qtyAmount: number) {
-    this.quantity = qtyAmount;
   }
 
   private processWithdraw({ amount, actions }: HandleArgs) {
