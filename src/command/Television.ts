@@ -14,7 +14,7 @@ export class Television {
   }
 
   volumeDown(amount: number) {
-    if (amount < 0 || !this.isOn) return;
+    if (!this.isOn) return;
     this.volume = Math.max(this.MIN_VOLUME, this.volume - amount);
   }
 }

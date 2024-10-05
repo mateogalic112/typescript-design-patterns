@@ -1,5 +1,8 @@
 import { Television } from "./Television";
-import { Command } from "./types";
+
+export interface Command {
+  execute(): void;
+}
 
 export class ToggleCommand implements Command {
   constructor(private readonly television: Television) {}
