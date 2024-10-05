@@ -5,12 +5,12 @@ export class LineReader {
   async *readLines(filePath: string) {
     const fileStream = fs.createReadStream(filePath, { encoding: "utf-8" });
 
-    const rl = readline.createInterface({
+    const lines = readline.createInterface({
       input: fileStream,
       crlfDelay: Infinity,
     });
 
-    for await (const line of rl) {
+    for await (const line of lines) {
       yield line;
     }
   }

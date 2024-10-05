@@ -19,8 +19,7 @@ export class WeaponProcessor extends LineProcessor<Weapon[]> {
     const weapons: Weapon[] = [];
 
     for await (const line of this.lineReader.readLines(filePath)) {
-      const weaponData = this.toWeapon(line);
-      weapons.push(weaponData);
+      weapons.push(this.toWeapon(line));
     }
 
     return weapons;

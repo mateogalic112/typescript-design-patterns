@@ -19,8 +19,7 @@ export class CityProcessor extends LineProcessor<City[]> {
     const cities: City[] = [];
 
     for await (const line of this.lineReader.readLines(filePath)) {
-      const cityData = this.toCity(line);
-      cities.push(cityData);
+      cities.push(this.toCity(line));
     }
 
     return cities;
