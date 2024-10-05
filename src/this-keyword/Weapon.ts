@@ -1,5 +1,11 @@
-import { Warrior } from "./Warrior";
-import { WarriorType, WeaponType } from "./types";
+import { Warrior, WarriorType } from "./Warrior";
+
+export enum WeaponType {
+  LEFT_HAND,
+  RIGHT_HAND,
+  BODY,
+  HEAD,
+}
 
 export class Weapon {
   constructor(

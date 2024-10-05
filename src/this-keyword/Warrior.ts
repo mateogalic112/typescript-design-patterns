@@ -1,5 +1,10 @@
 import { Weapon } from "./Weapon";
-import { WarriorType } from "./types";
+
+export enum WarriorType {
+  ROMAN = "roman",
+  SPARTAN = "spartan",
+  PERSIAN = "persian",
+}
 
 export class Warrior {
   constructor(
@@ -10,11 +15,10 @@ export class Warrior {
   ) {}
 
   private calculateStats() {
-    const stats = this.weapons.reduce(
+    return this.weapons.reduce(
       (total, weapon) => {
         const { attackPoints, defensePoints } = weapon.increasePoints(this);
         return {
-          ...total,
           attack: total.attack + attackPoints,
           defense: total.defense + defensePoints,
         };
@@ -24,8 +28,6 @@ export class Warrior {
         defense: this.defense,
       }
     );
-
-    return stats;
   }
 
   attachWeapon(newWeapon: Weapon) {
@@ -35,7 +37,6 @@ export class Warrior {
     if (hasWeaponTypeAttached) {
       throw new Error(`Weapon type ${newWeapon.getType()} already attached!`);
     }
-
     this.weapons.push(newWeapon);
     return this;
   }

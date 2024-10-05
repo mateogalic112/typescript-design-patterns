@@ -1,6 +1,6 @@
-import { Warrior } from "./Warrior";
-import { Weapon } from "./Weapon";
-import { WarriorType, WeaponType } from "./types";
+import { warriorPointsPercentage } from "./utils";
+import { Warrior, WarriorType } from "./Warrior";
+import { Weapon, WeaponType } from "./Weapon";
 
 describe("Weapon functionality", () => {
   let sword: Weapon;
@@ -34,9 +34,3 @@ describe("Weapon functionality", () => {
     });
   });
 });
-
-const warriorPointsPercentage = {
-  [WarriorType.ROMAN]: 100,
-  [WarriorType.SPARTAN]: 80,
-  [WarriorType.PERSIAN]: 20,
-};
