@@ -1,31 +1,20 @@
-const duplicate = (x: number): number => x + x;
-const addTwo = (x: number): number => x + 2;
+const addTwo = (x: number) => x + 2;
+const duplicate = (x: number) => x + x;
 
 const mapTR =
-  <V, W>(fn: (x: V) => W) =>
-  <A>(reducer: (am: A, wm: W) => A) =>
-  (accum: A, value: V): A =>
+  <V>(fn: (x: V) => V) =>
+  (reducer: (am: V[], wm: V) => V[]) =>
+  (accum: V[], value: V): V[] =>
     reducer(accum, fn(value));
 
 // transducer functions
-const duplicateR = mapTR(duplicate);
 const addTwoR = mapTR(addTwo);
+const duplicateR = mapTR(duplicate);
 
 // reducer function
-const addToArray = <V>(a: V[], v: V): V[] => {
-  return [...a, v];
-};
+const addToArray = <V>(acc: V[], val: V) => acc.concat(val);
 
-const testArray = [22, 9, 60];
+// Magic happens here
+const result = [22, 9, 60].reduce(duplicateR(addTwoR(addToArray)), []);
 
-const resultArrayI = testArray.reduce<number[]>(
-  duplicateR(addTwoR(addToArray)),
-  []
-); // [ 46, 20, 122 ]
-
-// Explicit way
-const resultArrayII = testArray.reduce<number[]>(
-  (acc, item) =>
-    duplicateR<number[]>(addTwoR<number[]>(addToArray))(acc, item),
-  []
-);
+console.log(result); // [ 46, 20, 122 ]
