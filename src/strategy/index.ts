@@ -1,14 +1,12 @@
-import { AuthProvider, Authenticator } from "./Authenticator";
+import { Authenticator } from "./Authenticator";
+import { LocalStrategy, TwitterStrategy } from "./Providers";
 
 function main() {
-  const auth = new Authenticator();
+  const twitterLogin = new Authenticator(new TwitterStrategy());
+  twitterLogin.authenticate(["token123"]);
 
-  function login(provider: AuthProvider, ...args: string[]) {
-    return auth.authenticate(provider, args);
-  }
-
-  login(AuthProvider.TWITTER, "token123");
-  login(AuthProvider.LOCAL, "matteoo.eth", "eth");
+  const localLogin = new Authenticator(new LocalStrategy());
+  localLogin.authenticate(["matteoo.eth", "eth"]);
 }
 
 main();

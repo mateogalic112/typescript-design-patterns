@@ -1,41 +1,29 @@
-import { AuthProvider, Authenticator } from "./Authenticator";
+import { Authenticator } from "./Authenticator";
+import { LocalStrategy, TwitterStrategy } from "./Providers";
 
 describe("Authenticator functionality", () => {
-  let authenticator: Authenticator;
-
-  beforeEach(() => {
-    authenticator = new Authenticator();
-  });
-
   describe("Local login strategy", () => {
+    const localLogin = new Authenticator(new LocalStrategy());
     test("Should fail if username or password not match", () => {
-      expect(
-        authenticator.authenticate(AuthProvider.LOCAL, ["matteoo.eth", "123"])
-      ).toBeFalsy();
+      expect(localLogin.authenticate(["matteoo.eth", "123"])).toBeFalsy();
 
-      expect(
-        authenticator.authenticate(AuthProvider.LOCAL, ["matt.eth", "eth"])
-      ).toBeFalsy();
+      expect(localLogin.authenticate(["matt.eth", "eth"])).toBeFalsy();
     });
 
     test("Should succeed when username and password are correct", () => {
-      expect(
-        authenticator.authenticate(AuthProvider.LOCAL, ["matteoo.eth", "eth"])
-      ).toBeTruthy();
+      expect(localLogin.authenticate(["matteoo.eth", "eth"])).toBeTruthy();
     });
   });
 
   describe("Twitter login strategy", () => {
+    const twitterLogin = new Authenticator(new TwitterStrategy());
+
     test("Should fail if token do not match", () => {
-      expect(
-        authenticator.authenticate(AuthProvider.TWITTER, ["faketoken"])
-      ).toBeFalsy();
+      expect(twitterLogin.authenticate(["faketoken"])).toBeFalsy();
     });
 
     test("Should succeed when token is correct", () => {
-      expect(
-        authenticator.authenticate(AuthProvider.TWITTER, ["tw123"])
-      ).toBeTruthy();
+      expect(twitterLogin.authenticate(["tw123"])).toBeTruthy();
     });
   });
 });

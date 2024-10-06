@@ -1,5 +1,3 @@
-import { LocalStrategy, TwitterStrategy } from "./Providers";
-
 export interface AuthStrategy {
   authenticate(args: string[]): boolean;
 }
@@ -10,16 +8,13 @@ export enum AuthProvider {
 }
 
 export class Authenticator {
-  private strategies: Record<AuthProvider, AuthStrategy> = {
-    [AuthProvider.TWITTER]: new TwitterStrategy(),
-    [AuthProvider.LOCAL]: new LocalStrategy(),
-  };
+  private authStrategy: AuthStrategy;
 
-  authenticate(provider: AuthProvider, args: string[]) {
-    if (!this.strategies[provider]) {
-      console.error("Authentication policy has not been set!");
-      return false;
-    }
-    return this.strategies[provider].authenticate.apply(null, [args]);
+  constructor(authStrategy: AuthStrategy) {
+    this.authStrategy = authStrategy;
+  }
+
+  authenticate(args: string[]) {
+    return this.authStrategy.authenticate.apply(null, [args]);
   }
 }
