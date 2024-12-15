@@ -2,11 +2,6 @@ export interface AuthStrategy {
   authenticate(args: string[]): boolean;
 }
 
-export enum AuthProvider {
-  TWITTER = "TWITTER",
-  LOCAL = "LOCAL",
-}
-
 export class Authenticator {
   private authStrategy: AuthStrategy;
 
