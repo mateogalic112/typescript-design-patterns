@@ -1,9 +1,9 @@
-import { Weapon } from "./Weapon";
+import { Weapon, WeaponType } from "./Weapon";
 
 export enum WarriorType {
-  ROMAN = "roman",
-  SPARTAN = "spartan",
-  PERSIAN = "persian",
+  ROMAN,
+  SPARTAN,
+  PERSIAN,
 }
 
 export class Warrior {
@@ -11,33 +11,15 @@ export class Warrior {
     private attack: number,
     private defense: number,
     private type: WarriorType,
-    private weapons: Weapon[] = []
+    private weapons: Map<WeaponType, Weapon> = new Map()
   ) {}
 
-  private calculateStats() {
-    return this.weapons.reduce(
-      (total, weapon) => {
-        const { attackPoints, defensePoints } = weapon.increasePoints(this);
-        return {
-          attack: total.attack + attackPoints,
-          defense: total.defense + defensePoints,
-        };
-      },
-      {
-        attack: this.attack,
-        defense: this.defense,
-      }
-    );
-  }
-
   attachWeapon(newWeapon: Weapon) {
-    const hasWeaponTypeAttached = this.weapons.find(
-      (weapon) => weapon.getType() === newWeapon.getType()
-    );
+    const hasWeaponTypeAttached = this.weapons.has(newWeapon.getType());
     if (hasWeaponTypeAttached) {
       throw new Error(`Weapon type ${newWeapon.getType()} already attached!`);
     }
-    this.weapons.push(newWeapon);
+    this.weapons.set(newWeapon.getType(), newWeapon);
     return this;
   }
 
@@ -51,5 +33,21 @@ export class Warrior {
       type: this.type,
       weapons: this.weapons,
     };
+  }
+
+  private calculateStats() {
+    return Array.from(this.weapons.values()).reduce(
+      (total, weapon) => {
+        const { attackPoints, defensePoints } = weapon.increasePoints(this);
+        return {
+          attack: total.attack + attackPoints,
+          defense: total.defense + defensePoints,
+        };
+      },
+      {
+        attack: this.attack,
+        defense: this.defense,
+      }
+    );
   }
 }

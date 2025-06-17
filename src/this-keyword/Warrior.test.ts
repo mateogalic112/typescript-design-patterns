@@ -1,5 +1,6 @@
 import { weaponInventory } from "./utils";
 import { Warrior, WarriorType } from "./Warrior";
+import { WeaponType } from "./Weapon";
 
 describe("Warrior functionality", () => {
   let spartanWarrior: Warrior;
@@ -26,7 +27,7 @@ describe("Warrior functionality", () => {
         .attachWeapon(weaponInventory.sword)
         .attachWeapon(weaponInventory.helmet);
 
-      expect(spartanWarrior.getWarriorInfo().weapons.length).toBe(2);
+      expect(spartanWarrior.getWarriorInfo().weapons.size).toBe(2);
     });
   });
 
@@ -36,7 +37,7 @@ describe("Warrior functionality", () => {
         attack: 100,
         defense: 100,
         type: WarriorType.SPARTAN,
-        weapons: [],
+        weapons: new Map(),
       });
     });
 
@@ -49,7 +50,10 @@ describe("Warrior functionality", () => {
         attack: 100 + 80 + 80,
         defense: 100 + 8 + 80,
         type: WarriorType.SPARTAN,
-        weapons: [weaponInventory.sword, weaponInventory.helmet],
+        weapons: new Map([
+          [WeaponType.LEFT_HAND, weaponInventory.sword],
+          [WeaponType.HEAD, weaponInventory.helmet],
+        ]),
       });
     });
   });
