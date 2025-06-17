@@ -3,17 +3,13 @@ import { Warrior, WarriorType } from "./Warrior";
 import { Weapon, WeaponType } from "./Weapon";
 
 describe("Weapon functionality", () => {
-  let sword: Weapon;
-
-  beforeEach(() => {
-    sword = new Weapon(
-      "Sword",
-      100,
-      100,
-      WeaponType.LEFT_HAND,
-      warriorPointsPercentage
-    );
-  });
+  const sword = new Weapon(
+    "Sword",
+    100,
+    100,
+    WeaponType.LEFT_HAND,
+    warriorPointsPercentage
+  );
 
   test("Should increase warrior points based on warrior type", () => {
     const spartanWarrior = new Warrior(100, 100, WarriorType.SPARTAN);
