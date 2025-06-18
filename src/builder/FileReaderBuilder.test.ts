@@ -26,9 +26,7 @@ describe("File Reader Builder functionality", () => {
     });
 
     test("Should return FileReader instance when only file path is provided", () => {
-      const fileReader = fileReaderBuilder
-        .setFilePath("/some-path")
-        .build();
+      const fileReader = fileReaderBuilder.setFilePath("/some-path").build();
 
       expect(fileReader).toBeInstanceOf(FileReader);
     });

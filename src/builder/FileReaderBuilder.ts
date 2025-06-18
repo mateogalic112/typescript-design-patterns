@@ -1,28 +1,21 @@
 import { FileReader, Preprocessor } from "./FileReader";
 
-interface IFileReaderBuilder {
-  setFilePath(path: string): IFileReaderBuilder;
-  addPreprocessor(processor: (data: string) => string): IFileReaderBuilder;
-  setEncoding(encoding: BufferEncoding): IFileReaderBuilder;
-  build(): FileReader;
-}
-
-export class FileReaderBuilder implements IFileReaderBuilder {
-  private filePath: string = "";
+export class FileReaderBuilder {
+  private filePath = "";
   private encoding: BufferEncoding = "utf-8";
   private preprocessors: Preprocessor[] = [];
 
-  setFilePath(path: string): IFileReaderBuilder {
+  setFilePath(path: string) {
     this.filePath = path;
     return this;
   }
 
-  addPreprocessor(processor: (data: string) => string): IFileReaderBuilder {
+  addPreprocessor(processor: (data: string) => string) {
     this.preprocessors.push(processor);
     return this;
   }
 
-  setEncoding(encoding: BufferEncoding): IFileReaderBuilder {
+  setEncoding(encoding: BufferEncoding) {
     this.encoding = encoding;
     return this;
   }
