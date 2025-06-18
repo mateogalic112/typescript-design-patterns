@@ -1,4 +1,4 @@
-import { FileReader, Preprocessor } from "./FileReader";
+import { FileReader, Preprocessor } from "../FileReader";
 
 describe("File Reader functionality", () => {
   describe("Parsing file", () => {
@@ -10,7 +10,7 @@ describe("File Reader functionality", () => {
       data.replace(/\b[A-Z]+\b/g, "").trim();
 
     test("Should throw if file does not exists", async () => {
-      const FILE_PATH = "./src/builder/wrong-file.txt";
+      const FILE_PATH = "./src/builder/__tests__/wrong-file.txt";
 
       const fileReader = new FileReader(FILE_PATH, TEXT_ENCODING, []);
 
@@ -18,7 +18,7 @@ describe("File Reader functionality", () => {
     });
 
     test("It should return empty string if file is empty", async () => {
-      const FILE_PATH = "./src/builder/test-empty-file.txt";
+      const FILE_PATH = "./src/builder/__tests__/test-empty-file.txt";
       const preprocessors = [removeUppercaseWords, toUpperCase];
 
       const fileReader = new FileReader(
@@ -33,7 +33,7 @@ describe("File Reader functionality", () => {
     });
 
     test("It first removes all uppercase words, then makes remaining words uppercased", async () => {
-      const FILE_PATH = "./src/builder/test-file.txt";
+      const FILE_PATH = "./src/builder/__tests__/test-file.txt";
       const preprocessors = [removeUppercaseWords, toUpperCase];
 
       const fileReader = new FileReader(

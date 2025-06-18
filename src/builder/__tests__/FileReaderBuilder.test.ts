@@ -1,5 +1,5 @@
-import { FileReader, Preprocessor } from "./FileReader";
-import { FileReaderBuilder } from "./FileReaderBuilder";
+import { FileReader, Preprocessor } from "../FileReader";
+import { FileReaderBuilder } from "../FileReaderBuilder";
 
 describe("File Reader Builder functionality", () => {
   describe("Building file reader", () => {

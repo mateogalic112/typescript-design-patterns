@@ -10,7 +10,7 @@ function main() {
     data.replace(/\b[A-Z]+\b/g, "").trim();
 
   const fileReader = fileReaderBuilder
-    .setFilePath("./src/builder/test.txt")
+    .setFilePath("./src/builder/__tests__/test.txt")
     .setEncoding("utf-8")
     .addPreprocessor(removeUppercaseWords)
     .addPreprocessor(toUpperCase)
