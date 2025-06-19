@@ -10,10 +10,12 @@ export class FileReader {
   ) {}
 
   async readAndProcess(): Promise<string> {
+    // Asynchronously reads the entire contents of a file.
     let data = await fs.promises.readFile(this.filePath, {
       encoding: this.encoding,
     });
 
+    // Transforms entire contents of a file for each preprocessor
     this.preprocessors.forEach((processor) => {
       data = processor(data);
     });

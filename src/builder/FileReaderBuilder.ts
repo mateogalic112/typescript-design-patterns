@@ -10,7 +10,7 @@ export class FileReaderBuilder {
     return this;
   }
 
-  addPreprocessor(processor: (data: string) => string) {
+  addPreprocessor(processor: Preprocessor) {
     this.preprocessors.push(processor);
     return this;
   }
