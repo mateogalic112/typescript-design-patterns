@@ -16,10 +16,9 @@ export class FileProcessor {
     });
 
     // Transforms entire contents of a file for each preprocessor
-    this.preprocessors.forEach((processor) => {
-      data = processor(data);
-    });
-
-    return data;
+    return this.preprocessors.reduce(
+      (output, processor) => processor(output),
+      data
+    );
   }
 }
