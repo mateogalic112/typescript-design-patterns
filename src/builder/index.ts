@@ -1,8 +1,8 @@
-import { Preprocessor } from "./FileReader";
-import { FileReaderBuilder } from "./FileReaderBuilder";
+import { Preprocessor } from "./FileProcessor";
+import { FileProcessorBuilder } from "./FileProcessorBuilder";
 
 function main() {
-  const fileReaderBuilder = new FileReaderBuilder();
+  const fileProcessorBuilder = new FileProcessorBuilder();
 
   const toUpperCase: Preprocessor = (data: string) => data.toUpperCase();
 
@@ -12,7 +12,7 @@ function main() {
   const removeExtraWhitespaces: Preprocessor = (data: string) =>
     data.replace(/(\S) {2,}(?=\S)/g, "$1 ");
 
-  const fileReader = fileReaderBuilder
+  const fileProcessor = fileProcessorBuilder
     .setFilePath("./src/builder/crypto.txt")
     .setEncoding("utf-8")
     .addPreprocessor(removeUppercaseWords)
@@ -20,7 +20,7 @@ function main() {
     .addPreprocessor(toUpperCase)
     .build();
 
-  fileReader.readAndProcess().then(console.log).catch(console.error);
+  fileProcessor.process().then(console.log).catch(console.error);
 }
 
 main();

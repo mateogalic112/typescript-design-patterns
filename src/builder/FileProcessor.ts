@@ -2,14 +2,14 @@ import fs from "fs";
 
 export type Preprocessor = (data: string) => string;
 
-export class FileReader {
+export class FileProcessor {
   constructor(
     private filePath: string,
     private encoding: BufferEncoding,
     private preprocessors: Array<Preprocessor>
   ) {}
 
-  async readAndProcess(): Promise<string> {
+  async process() {
     // Asynchronously reads the entire contents of a file.
     let data = await fs.promises.readFile(this.filePath, {
       encoding: this.encoding,

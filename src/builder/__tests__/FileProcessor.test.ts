@@ -1,6 +1,6 @@
-import { FileReader, Preprocessor } from "../FileReader";
+import { FileProcessor, Preprocessor } from "../FileProcessor";
 
-describe("File Reader functionality", () => {
+describe("File Processor functionality", () => {
   describe("Parsing file", () => {
     const TEXT_ENCODING = "utf-8";
 
@@ -12,39 +12,39 @@ describe("File Reader functionality", () => {
     test("Should throw if file does not exists", async () => {
       const FILE_PATH = "./src/builder/__tests__/wrong-file.txt";
 
-      const fileReader = new FileReader(FILE_PATH, TEXT_ENCODING, []);
+      const fileProcessor = new FileProcessor(FILE_PATH, TEXT_ENCODING, []);
 
-      await expect(fileReader.readAndProcess()).rejects.toThrow();
+      await expect(fileProcessor.process()).rejects.toThrow();
     });
 
     test("It should return empty string if file is empty", async () => {
       const FILE_PATH = "./src/builder/__tests__/test-empty-file.txt";
       const preprocessors = [removeUppercaseWords, toUpperCase];
 
-      const fileReader = new FileReader(
+      const fileProcessor = new FileProcessor(
         FILE_PATH,
         TEXT_ENCODING,
         preprocessors
       );
 
-      const processedString = await fileReader.readAndProcess();
+      const processedFile = await fileProcessor.process();
 
-      expect(processedString).toBe("");
+      expect(processedFile).toBe("");
     });
 
     test("It first removes all uppercase words, then makes remaining words uppercased", async () => {
       const FILE_PATH = "./src/builder/__tests__/test-file.txt";
       const preprocessors = [removeUppercaseWords, toUpperCase];
 
-      const fileReader = new FileReader(
+      const fileProcessor = new FileProcessor(
         FILE_PATH,
         TEXT_ENCODING,
         preprocessors
       );
 
-      const processedString = await fileReader.readAndProcess();
+      const processedFile = await fileProcessor.process();
 
-      expect(processedString).toBe("AM JUST A DUMMY FILE!");
+      expect(processedFile).toBe("AM JUST A DUMMY FILE!");
     });
   });
 });

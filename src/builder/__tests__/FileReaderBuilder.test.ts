@@ -1,8 +1,8 @@
-import { FileReader, Preprocessor } from "../FileReader";
-import { FileReaderBuilder } from "../FileReaderBuilder";
+import { FileProcessor, Preprocessor } from "../FileProcessor";
+import { FileProcessorBuilder } from "../FileProcessorBuilder";
 
-describe("File Reader Builder functionality", () => {
-  describe("Building file reader", () => {
+describe("File Processor Builder functionality", () => {
+  describe("Building file processor", () => {
     const TEXT_ENCODING = "utf-8";
 
     const toUpperCase: Preprocessor = (data: string) => data.toUpperCase();
@@ -10,40 +10,43 @@ describe("File Reader Builder functionality", () => {
     const removeUppercaseWords: Preprocessor = (data: string) =>
       data.replace(/\b[A-Z]+\b/g, "").trim();
 
-    let fileReaderBuilder: FileReaderBuilder;
+    let fileProcessorBuilder: FileProcessorBuilder;
+
     beforeEach(() => {
-      fileReaderBuilder = new FileReaderBuilder();
+      fileProcessorBuilder = new FileProcessorBuilder();
     });
 
     test("Should throw if file does not exists", () => {
-      const fileReaderConstruct = fileReaderBuilder
+      const fileProcessorConstruct = fileProcessorBuilder
         .setEncoding(TEXT_ENCODING)
         .addPreprocessor(toUpperCase);
 
-      expect(() => fileReaderConstruct.build()).toThrowError(
+      expect(() => fileProcessorConstruct.build()).toThrowError(
         "File path is required"
       );
     });
 
-    test("Should return FileReader instance when only file path is provided", () => {
-      const fileReader = fileReaderBuilder.setFilePath("/some-path").build();
+    test("Should return FileProcessor instance when only file path is provided", () => {
+      const fileProcessor = fileProcessorBuilder
+        .setFilePath("/some-path")
+        .build();
 
-      expect(fileReader).toBeInstanceOf(FileReader);
+      expect(fileProcessor).toBeInstanceOf(FileProcessor);
     });
 
-    test("Should return FileReader instance with proper fields set", () => {
+    test("Should return FileProcessor instance with proper fields set", () => {
       const filePath = "/some-path";
       const encoding: BufferEncoding = "base64";
 
-      const fileReader = fileReaderBuilder
+      const fileProcessor = fileProcessorBuilder
         .setFilePath(filePath)
         .setEncoding(encoding)
         .addPreprocessor(toUpperCase)
         .addPreprocessor(removeUppercaseWords)
         .build();
 
-      expect(fileReader).toBeInstanceOf(FileReader);
-      expect(fileReader).toMatchObject({
+      expect(fileProcessor).toBeInstanceOf(FileProcessor);
+      expect(fileProcessor).toMatchObject({
         filePath,
         encoding,
         preprocessors: [toUpperCase, removeUppercaseWords],

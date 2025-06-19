@@ -1,6 +1,6 @@
-import { FileReader, Preprocessor } from "./FileReader";
+import { FileProcessor, Preprocessor } from "./FileProcessor";
 
-export class FileReaderBuilder {
+export class FileProcessorBuilder {
   private filePath = "";
   private encoding: BufferEncoding = "utf-8";
   private preprocessors: Preprocessor[] = [];
@@ -20,9 +20,9 @@ export class FileReaderBuilder {
     return this;
   }
 
-  build(): FileReader {
+  build() {
     if (!this.filePath) throw new Error("File path is required");
 
-    return new FileReader(this.filePath, this.encoding, this.preprocessors);
+    return new FileProcessor(this.filePath, this.encoding, this.preprocessors);
   }
 }
