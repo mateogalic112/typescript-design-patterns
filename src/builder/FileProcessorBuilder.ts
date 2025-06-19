@@ -10,13 +10,13 @@ export class FileProcessorBuilder {
     return this;
   }
 
-  addPreprocessor(processor: Preprocessor) {
-    this.preprocessors.push(processor);
+  setEncoding(encoding: BufferEncoding) {
+    this.encoding = encoding;
     return this;
   }
 
-  setEncoding(encoding: BufferEncoding) {
-    this.encoding = encoding;
+  addPreprocessor(processor: Preprocessor) {
+    this.preprocessors.push(processor);
     return this;
   }
 
