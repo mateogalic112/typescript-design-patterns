@@ -10,15 +10,15 @@ export class FileProcessor {
   ) {}
 
   async process() {
-    // Asynchronously reads the entire contents of a file.
-    let data = await fs.promises.readFile(this.filePath, {
+    // Reads the entire contents of a file in memory
+    let fileContent = await fs.promises.readFile(this.filePath, {
       encoding: this.encoding,
     });
 
-    // Transforms entire contents of a file for each preprocessor
+    // Transforms file content for each preprocessor
     return this.preprocessors.reduce(
       (output, processor) => processor(output),
-      data
+      fileContent
     );
   }
 }
