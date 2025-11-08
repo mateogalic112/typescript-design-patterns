@@ -1,13 +1,14 @@
-import { Warrior, WarriorType } from "./Warrior";
+import { WarriorType } from "./Warrior";
+import { WarriorFactory } from "./WarriorFactory";
 import { WeaponFactory, WeaponType } from "./WeaponFactory";
 
 describe("Weapon functionality", () => {
   const sword = WeaponFactory.createWeapon(WeaponType.SWORD);
 
   test("Should increase warrior points based on warrior type", () => {
-    const spartanWarrior = new Warrior(100, 100, WarriorType.SPARTAN);
-    const romanWarrior = new Warrior(100, 100, WarriorType.ROMAN);
-    const persianWarrior = new Warrior(100, 100, WarriorType.PERSIAN);
+    const spartanWarrior = WarriorFactory.createWarrior(WarriorType.SPARTAN);
+    const romanWarrior = WarriorFactory.createWarrior(WarriorType.ROMAN);
+    const persianWarrior = WarriorFactory.createWarrior(WarriorType.PERSIAN);
 
     expect(sword.increasePoints(spartanWarrior)).toMatchObject({
       attackPoints: 80,

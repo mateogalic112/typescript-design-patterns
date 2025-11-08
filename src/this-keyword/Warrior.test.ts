@@ -1,4 +1,5 @@
 import { Warrior, WarriorType } from "./Warrior";
+import { WarriorFactory } from "./WarriorFactory";
 import { AttachmentType } from "./Weapon";
 import { WeaponFactory, WeaponType } from "./WeaponFactory";
 
@@ -9,7 +10,7 @@ describe("Warrior functionality", () => {
   const helmet = WeaponFactory.createWeapon(WeaponType.HELMET);
 
   beforeEach(() => {
-    spartanWarrior = new Warrior(100, 100, WarriorType.SPARTAN);
+    spartanWarrior = WarriorFactory.createWarrior(WarriorType.SPARTAN);
   });
 
   describe("Attach weapon to warrior", () => {
