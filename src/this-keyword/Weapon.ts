@@ -1,6 +1,6 @@
 import { Warrior, WarriorType } from "./Warrior";
 
-export enum WeaponType {
+export enum AttachmentType {
   LEFT_HAND,
   RIGHT_HAND,
   BODY,
@@ -12,7 +12,7 @@ export class Weapon {
     private readonly name: string,
     private readonly attackPoints: number,
     private readonly defensePoints: number,
-    private readonly type: WeaponType,
+    private readonly type: AttachmentType,
     private readonly warriorPointsPercentage: Record<WarriorType, number>
   ) {}
 

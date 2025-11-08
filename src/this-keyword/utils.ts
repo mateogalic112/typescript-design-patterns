@@ -1,5 +1,5 @@
 import { WarriorType } from "./Warrior";
-import { Weapon, WeaponType } from "./Weapon";
+import { Weapon, AttachmentType } from "./Weapon";
 
 export const warriorPointsPercentage = {
   [WarriorType.ROMAN]: 100,
@@ -12,21 +12,21 @@ export const weaponInventory: Record<string, Weapon> = {
     "Sword",
     100,
     10,
-    WeaponType.LEFT_HAND,
+    AttachmentType.LEFT_HAND,
     warriorPointsPercentage
   ),
   axe: new Weapon(
     "Axe",
     200,
     10,
-    WeaponType.LEFT_HAND,
+    AttachmentType.LEFT_HAND,
     warriorPointsPercentage
   ),
   helmet: new Weapon(
     "Helmet",
     100,
     100,
-    WeaponType.HEAD,
+    AttachmentType.HEAD,
     warriorPointsPercentage
   ),
 };

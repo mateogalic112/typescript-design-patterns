@@ -1,13 +1,13 @@
 import { warriorPointsPercentage } from "./utils";
 import { Warrior, WarriorType } from "./Warrior";
-import { Weapon, WeaponType } from "./Weapon";
+import { Weapon, AttachmentType } from "./Weapon";
 
 describe("Weapon functionality", () => {
   const sword = new Weapon(
     "Sword",
     100,
     100,
-    WeaponType.LEFT_HAND,
+    AttachmentType.LEFT_HAND,
     warriorPointsPercentage
   );
 

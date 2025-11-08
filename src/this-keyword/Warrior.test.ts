@@ -1,6 +1,6 @@
 import { weaponInventory } from "./utils";
 import { Warrior, WarriorType } from "./Warrior";
-import { WeaponType } from "./Weapon";
+import { AttachmentType } from "./Weapon";
 
 describe("Warrior functionality", () => {
   let spartanWarrior: Warrior;
@@ -51,8 +51,8 @@ describe("Warrior functionality", () => {
         defense: 100 + 8 + 80,
         type: WarriorType.SPARTAN,
         weapons: new Map([
-          [WeaponType.LEFT_HAND, weaponInventory.sword],
-          [WeaponType.HEAD, weaponInventory.helmet],
+          [AttachmentType.LEFT_HAND, weaponInventory.sword],
+          [AttachmentType.HEAD, weaponInventory.helmet],
         ]),
       });
     });

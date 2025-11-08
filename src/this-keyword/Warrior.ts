@@ -1,4 +1,4 @@
-import { Weapon, WeaponType } from "./Weapon";
+import { Weapon, AttachmentType } from "./Weapon";
 
 export enum WarriorType {
   ROMAN,
@@ -11,7 +11,7 @@ export class Warrior {
     private attack: number,
     private defense: number,
     private type: WarriorType,
-    private weapons: Map<WeaponType, Weapon> = new Map()
+    private weapons: Map<AttachmentType, Weapon> = new Map()
   ) {}
 
   attachWeapon(newWeapon: Weapon) {
