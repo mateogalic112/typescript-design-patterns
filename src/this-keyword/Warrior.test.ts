@@ -31,7 +31,7 @@ describe("Warrior functionality", () => {
         .attachWeapon(sword, AttachmentType.LEFT_HAND)
         .attachWeapon(helmet, AttachmentType.HEAD);
 
-      expect(spartanWarrior.getWarriorInfo().weapons.size).toBe(2);
+      expect(spartanWarrior.getWeapons().size).toBe(2);
     });
   });
 

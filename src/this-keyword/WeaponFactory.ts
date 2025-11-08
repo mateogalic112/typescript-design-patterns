@@ -40,6 +40,10 @@ class Sword extends Weapon {
         throw new Error("Unsupported warrior type");
     }
   }
+
+  toString() {
+    return `Sword - Attack: ${this.attackPoints}, Defense: ${this.defensePoints}`;
+  }
 }
 
 class Axe extends Weapon {
@@ -59,6 +63,10 @@ class Axe extends Weapon {
         throw new Error("Unsupported warrior type");
     }
   }
+
+  toString() {
+    return `Axe - Attack: ${this.attackPoints}, Defense: ${this.defensePoints}`;
+  }
 }
 
 class Helmet extends Weapon {
@@ -77,5 +85,9 @@ class Helmet extends Weapon {
       default:
         throw new Error("Unsupported warrior type");
     }
+  }
+
+  toString() {
+    return `Helmet - Attack: ${this.attackPoints}, Defense: ${this.defensePoints}`;
   }
 }

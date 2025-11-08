@@ -16,8 +16,12 @@ export class Warrior {
   getWarriorInfo() {
     return {
       ...this.calculateStats(),
-      weapons: this.weapons,
+      weapons: this.printWeapons(),
     };
+  }
+
+  getWeapons() {
+    return this.weapons;
   }
 
   attachWeapon(newWeapon: Weapon, attachmentType: AttachmentType) {
@@ -26,6 +30,10 @@ export class Warrior {
     }
     this.weapons.set(attachmentType, newWeapon);
     return this;
+  }
+
+  private printWeapons() {
+    return Array.from(this.weapons.values()).map((weapon) => weapon.toString());
   }
 
   private canAttachWeapon(newWeapon: Weapon, attachmentType: AttachmentType) {

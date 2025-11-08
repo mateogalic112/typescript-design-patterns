@@ -10,10 +10,12 @@ function main() {
   const persian = WarriorFactory.createWarrior(WarriorType.PERSIAN);
 
   const sword = WeaponFactory.createWeapon(WeaponType.SWORD);
+  const axe = WeaponFactory.createWeapon(WeaponType.AXE);
   const helmet = WeaponFactory.createWeapon(WeaponType.HELMET);
 
   roman
     .attachWeapon(sword, AttachmentType.LEFT_HAND)
+    .attachWeapon(axe, AttachmentType.RIGHT_HAND)
     .attachWeapon(helmet, AttachmentType.HEAD);
 
   spartan.attachWeapon(sword, AttachmentType.LEFT_HAND);
