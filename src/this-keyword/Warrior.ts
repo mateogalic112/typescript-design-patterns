@@ -49,15 +49,15 @@ export class Warrior {
   private calculateStats() {
     const initialPoints = { attack: this.attack, defense: this.defense };
     const weapons = Array.from(this.weapons.values());
-    return weapons.reduce(this.intoPoints.bind(this), initialPoints);
+    return weapons.reduce(this.intoPoints, initialPoints);
   }
 
-  private intoPoints(
+  private intoPoints = (
     result: { attack: number; defense: number },
     weapon: Weapon
-  ) {
+  ) => {
     result.attack += weapon.increasePoints(this).attackPoints;
     result.defense += weapon.increasePoints(this).defensePoints;
     return result;
-  }
+  };
 }
