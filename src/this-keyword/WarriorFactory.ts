@@ -13,20 +13,20 @@ export class WarriorFactory {
   }
 }
 
-class Roman extends Warrior {
+export class Roman extends Warrior {
   constructor() {
-    super(100, 100, WarriorType.ROMAN);
+    super(100, 100);
   }
 }
 
-class Spartan extends Warrior {
+export class Spartan extends Warrior {
   constructor() {
-    super(100, 100, WarriorType.SPARTAN);
+    super(100, 100);
   }
 }
 
-class Persian extends Warrior {
+export class Persian extends Warrior {
   constructor() {
-    super(100, 100, WarriorType.PERSIAN);
+    super(100, 100);
   }
 }

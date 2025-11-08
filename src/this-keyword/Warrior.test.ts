@@ -40,7 +40,6 @@ describe("Warrior functionality", () => {
       expect(spartanWarrior.getWarriorInfo()).toMatchObject({
         attack: 100,
         defense: 100,
-        type: WarriorType.SPARTAN,
         weapons: new Map(),
       });
     });
@@ -53,7 +52,6 @@ describe("Warrior functionality", () => {
       expect(spartanWarrior.getWarriorInfo()).toMatchObject({
         attack: 100 + 80 + 80,
         defense: 100 + 8 + 80,
-        type: WarriorType.SPARTAN,
         weapons: new Map([
           [AttachmentType.LEFT_HAND, sword],
           [AttachmentType.HEAD, helmet],

@@ -1,17 +1,12 @@
 import { AttachmentType, Weapon } from "./Weapon";
-import { WarriorType } from "./Warrior";
+import { Warrior } from "./Warrior";
+import { Persian, Roman, Spartan } from "./WarriorFactory";
 
 export enum WeaponType {
   SWORD,
   AXE,
   HELMET,
 }
-
-export const warriorPointsPercentage: Record<WarriorType, number> = {
-  [WarriorType.ROMAN]: 100,
-  [WarriorType.SPARTAN]: 80,
-  [WarriorType.PERSIAN]: 20,
-};
 
 export class WeaponFactory {
   static createWeapon(weaponType: WeaponType): Weapon {
@@ -30,28 +25,57 @@ export class WeaponFactory {
 
 class Sword extends Weapon {
   constructor() {
-    super(
-      100,
-      10,
-      [AttachmentType.LEFT_HAND, AttachmentType.RIGHT_HAND],
-      warriorPointsPercentage
-    );
+    super(100, 10, [AttachmentType.LEFT_HAND, AttachmentType.RIGHT_HAND]);
   }
+
+  getWarriorPointsPercentage = (warrior: Warrior) => {
+    switch (true) {
+      case warrior instanceof Roman:
+        return 100;
+      case warrior instanceof Spartan:
+        return 80;
+      case warrior instanceof Persian:
+        return 20;
+      default:
+        throw new Error("Unsupported warrior type");
+    }
+  };
 }
 
 class Axe extends Weapon {
   constructor() {
-    super(
-      200,
-      10,
-      [AttachmentType.LEFT_HAND, AttachmentType.RIGHT_HAND],
-      warriorPointsPercentage
-    );
+    super(200, 10, [AttachmentType.LEFT_HAND, AttachmentType.RIGHT_HAND]);
   }
+
+  getWarriorPointsPercentage = (warrior: Warrior) => {
+    switch (true) {
+      case warrior instanceof Roman:
+        return 100;
+      case warrior instanceof Spartan:
+        return 80;
+      case warrior instanceof Persian:
+        return 20;
+      default:
+        throw new Error("Unsupported warrior type");
+    }
+  };
 }
 
 class Helmet extends Weapon {
   constructor() {
-    super(100, 100, [AttachmentType.HEAD], warriorPointsPercentage);
+    super(100, 100, [AttachmentType.HEAD]);
   }
+
+  getWarriorPointsPercentage = (warrior: Warrior) => {
+    switch (true) {
+      case warrior instanceof Roman:
+        return 100;
+      case warrior instanceof Spartan:
+        return 80;
+      case warrior instanceof Persian:
+        return 20;
+      default:
+        throw new Error("Unsupported warrior type");
+    }
+  };
 }

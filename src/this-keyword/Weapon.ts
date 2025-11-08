@@ -11,8 +11,7 @@ export abstract class Weapon {
   constructor(
     protected readonly attackPoints: number,
     protected readonly defensePoints: number,
-    protected readonly attachmentTypes: Array<AttachmentType>,
-    protected readonly warriorPointsPercentage: Record<WarriorType, number>
+    protected readonly attachmentTypes: Array<AttachmentType>
   ) {}
 
   getAttachmentTypes() {
@@ -20,12 +19,13 @@ export abstract class Weapon {
   }
 
   increasePoints(warrior: Warrior) {
-    const pointsPercentage =
-      this.warriorPointsPercentage[warrior.getWarriorType()] / 100;
+    const pointsPercentage = this.getWarriorPointsPercentage(warrior) / 100;
 
     return {
       attackPoints: this.attackPoints * pointsPercentage,
       defensePoints: this.defensePoints * pointsPercentage,
     };
   }
+
+  abstract getWarriorPointsPercentage(warrior: Warrior): number;
 }

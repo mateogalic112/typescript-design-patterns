@@ -10,18 +10,12 @@ export class Warrior {
   constructor(
     private attack: number,
     private defense: number,
-    private type: WarriorType,
     private weapons: Map<AttachmentType, Weapon> = new Map()
   ) {}
-
-  getWarriorType() {
-    return this.type;
-  }
 
   getWarriorInfo() {
     return {
       ...this.calculateStats(),
-      type: this.type,
       weapons: this.weapons,
     };
   }
