@@ -5,6 +5,7 @@ import { WeaponFactory, WeaponType } from "./WeaponFactory";
 
 describe("Warrior functionality", () => {
   let spartanWarrior: Warrior;
+
   const sword = WeaponFactory.createWeapon(WeaponType.SWORD);
   const axe = WeaponFactory.createWeapon(WeaponType.AXE);
   const helmet = WeaponFactory.createWeapon(WeaponType.HELMET);
@@ -40,8 +41,8 @@ describe("Warrior functionality", () => {
       expect(spartanWarrior.getWarriorInfo()).toMatchObject({
         attack: 100,
         defense: 100,
-        weapons: new Map(),
       });
+      expect(spartanWarrior.getWeapons()).toEqual(new Map());
     });
 
     test("Should return new info after adding weapons", () => {
@@ -52,11 +53,13 @@ describe("Warrior functionality", () => {
       expect(spartanWarrior.getWarriorInfo()).toMatchObject({
         attack: 100 + 180 + 60,
         defense: 100 + 18 + 150,
-        weapons: new Map([
+      });
+      expect(spartanWarrior.getWeapons()).toEqual(
+        new Map([
           [AttachmentType.LEFT_HAND, sword],
           [AttachmentType.HEAD, helmet],
-        ]),
-      });
+        ])
+      );
     });
   });
 });
