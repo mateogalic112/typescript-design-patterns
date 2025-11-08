@@ -19,14 +19,11 @@ export abstract class Weapon {
   }
 
   increasePoints(warrior: Warrior) {
-    const {
-      attackPoints: warriorAttackPoints,
-      defensePoints: warriorDefensePoints,
-    } = this.getWarriorPoints(warrior);
-
     return {
-      attackPoints: this.attackPoints + warriorAttackPoints,
-      defensePoints: this.defensePoints + warriorDefensePoints,
+      attackPoints:
+        this.attackPoints + this.getWarriorPoints(warrior).attackPoints,
+      defensePoints:
+        this.defensePoints + this.getWarriorPoints(warrior).defensePoints,
     };
   }
 
