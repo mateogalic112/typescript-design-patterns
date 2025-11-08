@@ -47,18 +47,17 @@ export class Warrior {
   }
 
   private calculateStats() {
-    return Array.from(this.weapons.values()).reduce(
-      (total, weapon) => {
-        const { attackPoints, defensePoints } = weapon.increasePoints(this);
-        return {
-          attack: total.attack + attackPoints,
-          defense: total.defense + defensePoints,
-        };
-      },
-      {
-        attack: this.attack,
-        defense: this.defense,
-      }
-    );
+    const initialPoints = { attack: this.attack, defense: this.defense };
+    const weapons = Array.from(this.weapons.values());
+    return weapons.reduce(this.intoPoints.bind(this), initialPoints);
+  }
+
+  private intoPoints(
+    result: { attack: number; defense: number },
+    weapon: Weapon
+  ) {
+    result.attack += weapon.increasePoints(this).attackPoints;
+    result.defense += weapon.increasePoints(this).defensePoints;
+    return result;
   }
 }
