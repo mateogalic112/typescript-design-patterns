@@ -9,22 +9,23 @@ export enum AttachmentType {
 
 export abstract class Weapon {
   constructor(
-    protected readonly name: string,
     protected readonly attackPoints: number,
     protected readonly defensePoints: number,
-    protected readonly attachmentTypes: Array<AttachmentType>
+    protected readonly attachmentTypes: Array<AttachmentType>,
+    protected readonly warriorPointsPercentage: Record<WarriorType, number>
   ) {}
-
-  getName() {
-    return this.name;
-  }
 
   getAttachmentTypes() {
     return this.attachmentTypes;
   }
 
-  abstract increasePoints(warrior: Warrior): {
-    attackPoints: number;
-    defensePoints: number;
-  };
+  increasePoints(warrior: Warrior) {
+    const pointsPercentage =
+      this.warriorPointsPercentage[warrior.getWarriorType()] / 100;
+
+    return {
+      attackPoints: this.attackPoints * pointsPercentage,
+      defensePoints: this.defensePoints * pointsPercentage,
+    };
+  }
 }
