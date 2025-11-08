@@ -50,8 +50,8 @@ describe("Warrior functionality", () => {
         .attachWeapon(helmet, AttachmentType.HEAD);
 
       expect(spartanWarrior.getWarriorInfo()).toMatchObject({
-        attack: 100 + 80 + 80,
-        defense: 100 + 8 + 80,
+        attack: 100 + 180 + 60,
+        defense: 100 + 18 + 150,
         weapons: new Map([
           [AttachmentType.LEFT_HAND, sword],
           [AttachmentType.HEAD, helmet],

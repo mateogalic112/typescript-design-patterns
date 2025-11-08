@@ -28,18 +28,18 @@ class Sword extends Weapon {
     super(100, 10, [AttachmentType.LEFT_HAND, AttachmentType.RIGHT_HAND]);
   }
 
-  getWarriorPointsPercentage = (warrior: Warrior) => {
+  getWarriorPoints(warrior: Warrior) {
     switch (true) {
       case warrior instanceof Roman:
-        return 100;
+        return { attackPoints: 100, defensePoints: 10 };
       case warrior instanceof Spartan:
-        return 80;
+        return { attackPoints: 80, defensePoints: 8 };
       case warrior instanceof Persian:
-        return 20;
+        return { attackPoints: 20, defensePoints: 100 };
       default:
         throw new Error("Unsupported warrior type");
     }
-  };
+  }
 }
 
 class Axe extends Weapon {
@@ -47,35 +47,35 @@ class Axe extends Weapon {
     super(200, 10, [AttachmentType.LEFT_HAND, AttachmentType.RIGHT_HAND]);
   }
 
-  getWarriorPointsPercentage = (warrior: Warrior) => {
+  getWarriorPoints(warrior: Warrior) {
     switch (true) {
       case warrior instanceof Roman:
-        return 100;
+        return { attackPoints: 200, defensePoints: 20 };
       case warrior instanceof Spartan:
-        return 80;
+        return { attackPoints: 100, defensePoints: 10 };
       case warrior instanceof Persian:
-        return 20;
+        return { attackPoints: 50, defensePoints: 5 };
       default:
         throw new Error("Unsupported warrior type");
     }
-  };
+  }
 }
 
 class Helmet extends Weapon {
   constructor() {
-    super(100, 100, [AttachmentType.HEAD]);
+    super(10, 100, [AttachmentType.HEAD]);
   }
 
-  getWarriorPointsPercentage = (warrior: Warrior) => {
+  getWarriorPoints(warrior: Warrior) {
     switch (true) {
       case warrior instanceof Roman:
-        return 100;
+        return { attackPoints: 0, defensePoints: 100 };
       case warrior instanceof Spartan:
-        return 80;
+        return { attackPoints: 50, defensePoints: 50 };
       case warrior instanceof Persian:
-        return 20;
+        return { attackPoints: 20, defensePoints: 2 };
       default:
         throw new Error("Unsupported warrior type");
     }
-  };
+  }
 }

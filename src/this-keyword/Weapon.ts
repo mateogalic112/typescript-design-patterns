@@ -1,4 +1,4 @@
-import { Warrior, WarriorType } from "./Warrior";
+import { Warrior } from "./Warrior";
 
 export enum AttachmentType {
   LEFT_HAND,
@@ -19,13 +19,19 @@ export abstract class Weapon {
   }
 
   increasePoints(warrior: Warrior) {
-    const pointsPercentage = this.getWarriorPointsPercentage(warrior) / 100;
+    const {
+      attackPoints: warriorAttackPoints,
+      defensePoints: warriorDefensePoints,
+    } = this.getWarriorPoints(warrior);
 
     return {
-      attackPoints: this.attackPoints * pointsPercentage,
-      defensePoints: this.defensePoints * pointsPercentage,
+      attackPoints: this.attackPoints + warriorAttackPoints,
+      defensePoints: this.defensePoints + warriorDefensePoints,
     };
   }
 
-  abstract getWarriorPointsPercentage(warrior: Warrior): number;
+  abstract getWarriorPoints(warrior: Warrior): {
+    attackPoints: number;
+    defensePoints: number;
+  };
 }

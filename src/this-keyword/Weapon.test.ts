@@ -11,16 +11,16 @@ describe("Weapon functionality", () => {
     const persianWarrior = WarriorFactory.createWarrior(WarriorType.PERSIAN);
 
     expect(sword.increasePoints(spartanWarrior)).toMatchObject({
-      attackPoints: 80,
-      defensePoints: 8,
+      attackPoints: 180,
+      defensePoints: 18,
     });
     expect(sword.increasePoints(romanWarrior)).toMatchObject({
-      attackPoints: 100,
-      defensePoints: 10,
+      attackPoints: 200,
+      defensePoints: 20,
     });
     expect(sword.increasePoints(persianWarrior)).toMatchObject({
-      attackPoints: 20,
-      defensePoints: 2,
+      attackPoints: 120,
+      defensePoints: 110,
     });
   });
 });

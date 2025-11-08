@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "test": "jest",
-    "dev": "tsc && node build/builder/index.js"
+    "dev": "tsc && node build/this-keyword/index.js"
   },
   "repository": {
     "type": "git",
