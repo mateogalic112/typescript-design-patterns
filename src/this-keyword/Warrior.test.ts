@@ -1,9 +1,12 @@
-import { weaponInventory } from "./utils";
 import { Warrior, WarriorType } from "./Warrior";
 import { AttachmentType } from "./Weapon";
+import { WeaponFactory, WeaponType } from "./WeaponFactory";
 
 describe("Warrior functionality", () => {
   let spartanWarrior: Warrior;
+  const sword = WeaponFactory.createWeapon(WeaponType.SWORD);
+  const axe = WeaponFactory.createWeapon(WeaponType.AXE);
+  const helmet = WeaponFactory.createWeapon(WeaponType.HELMET);
 
   beforeEach(() => {
     spartanWarrior = new Warrior(100, 100, WarriorType.SPARTAN);
@@ -13,19 +16,19 @@ describe("Warrior functionality", () => {
     test("Should fail when equiping weapon with same type", () => {
       try {
         spartanWarrior
-          .attachWeapon(weaponInventory.sword)
-          .attachWeapon(weaponInventory.axe);
+          .attachWeapon(sword, AttachmentType.LEFT_HAND)
+          .attachWeapon(axe, AttachmentType.LEFT_HAND);
       } catch (e) {
         expect((e as Error).message).toBe(
-          `Weapon type ${weaponInventory.axe.getType()} already attached!`
+          `Weapon already attached to ${AttachmentType.LEFT_HAND}!`
         );
       }
     });
 
     test("Should add new weapon to warrior weapon inventory", () => {
       spartanWarrior
-        .attachWeapon(weaponInventory.sword)
-        .attachWeapon(weaponInventory.helmet);
+        .attachWeapon(sword, AttachmentType.LEFT_HAND)
+        .attachWeapon(helmet, AttachmentType.HEAD);
 
       expect(spartanWarrior.getWarriorInfo().weapons.size).toBe(2);
     });
@@ -43,16 +46,16 @@ describe("Warrior functionality", () => {
 
     test("Should return new info after adding weapons", () => {
       spartanWarrior
-        .attachWeapon(weaponInventory.sword)
-        .attachWeapon(weaponInventory.helmet);
+        .attachWeapon(sword, AttachmentType.LEFT_HAND)
+        .attachWeapon(helmet, AttachmentType.HEAD);
 
       expect(spartanWarrior.getWarriorInfo()).toMatchObject({
         attack: 100 + 80 + 80,
         defense: 100 + 8 + 80,
         type: WarriorType.SPARTAN,
         weapons: new Map([
-          [AttachmentType.LEFT_HAND, weaponInventory.sword],
-          [AttachmentType.HEAD, weaponInventory.helmet],
+          [AttachmentType.LEFT_HAND, sword],
+          [AttachmentType.HEAD, helmet],
         ]),
       });
     });

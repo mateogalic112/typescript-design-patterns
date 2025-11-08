@@ -14,15 +14,6 @@ export class Warrior {
     private weapons: Map<AttachmentType, Weapon> = new Map()
   ) {}
 
-  attachWeapon(newWeapon: Weapon) {
-    const hasWeaponTypeAttached = this.weapons.has(newWeapon.getType());
-    if (hasWeaponTypeAttached) {
-      throw new Error(`Weapon type ${newWeapon.getType()} already attached!`);
-    }
-    this.weapons.set(newWeapon.getType(), newWeapon);
-    return this;
-  }
-
   getWarriorType() {
     return this.type;
   }
@@ -33,6 +24,24 @@ export class Warrior {
       type: this.type,
       weapons: this.weapons,
     };
+  }
+
+  attachWeapon(newWeapon: Weapon, attachmentType: AttachmentType) {
+    if (!this.canAttachWeapon(newWeapon, attachmentType)) {
+      throw new Error(`Weapon already attached to ${attachmentType}!`);
+    }
+    this.weapons.set(attachmentType, newWeapon);
+    return this;
+  }
+
+  private canAttachWeapon(newWeapon: Weapon, attachmentType: AttachmentType) {
+    if (!newWeapon.getAttachmentTypes().includes(attachmentType)) {
+      return false;
+    }
+    if (this.weapons.get(attachmentType) instanceof Weapon) {
+      return false;
+    }
+    return true;
   }
 
   private calculateStats() {

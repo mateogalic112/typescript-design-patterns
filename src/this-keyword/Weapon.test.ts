@@ -1,15 +1,8 @@
-import { warriorPointsPercentage } from "./utils";
 import { Warrior, WarriorType } from "./Warrior";
-import { Weapon, AttachmentType } from "./Weapon";
+import { WeaponFactory, WeaponType } from "./WeaponFactory";
 
 describe("Weapon functionality", () => {
-  const sword = new Weapon(
-    "Sword",
-    100,
-    100,
-    AttachmentType.LEFT_HAND,
-    warriorPointsPercentage
-  );
+  const sword = WeaponFactory.createWeapon(WeaponType.SWORD);
 
   test("Should increase warrior points based on warrior type", () => {
     const spartanWarrior = new Warrior(100, 100, WarriorType.SPARTAN);
@@ -18,15 +11,15 @@ describe("Weapon functionality", () => {
 
     expect(sword.increasePoints(spartanWarrior)).toMatchObject({
       attackPoints: 80,
-      defensePoints: 80,
+      defensePoints: 8,
     });
     expect(sword.increasePoints(romanWarrior)).toMatchObject({
       attackPoints: 100,
-      defensePoints: 100,
+      defensePoints: 10,
     });
     expect(sword.increasePoints(persianWarrior)).toMatchObject({
       attackPoints: 20,
-      defensePoints: 20,
+      defensePoints: 2,
     });
   });
 });

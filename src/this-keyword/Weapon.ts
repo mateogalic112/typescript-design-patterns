@@ -9,11 +9,11 @@ export enum AttachmentType {
 
 export class Weapon {
   constructor(
-    private readonly name: string,
-    private readonly attackPoints: number,
-    private readonly defensePoints: number,
-    private readonly type: AttachmentType,
-    private readonly warriorPointsPercentage: Record<WarriorType, number>
+    protected readonly name: string,
+    protected readonly attackPoints: number,
+    protected readonly defensePoints: number,
+    protected readonly attachmentTypes: Array<AttachmentType>,
+    protected readonly warriorPointsPercentage: Record<WarriorType, number>
   ) {}
 
   getName() {
@@ -33,7 +33,7 @@ export class Weapon {
     };
   }
 
-  getType() {
-    return this.type;
+  getAttachmentTypes() {
+    return this.attachmentTypes;
   }
 }
