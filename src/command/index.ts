@@ -1,10 +1,10 @@
-import { Remote } from "./Remote";
-import { Television } from "./Television";
 import {
+  Remote,
   ToggleCommand,
-  VolumeDownCommand,
   VolumeUpCommand,
-} from "./TelevisionCommands";
+  VolumeDownCommand,
+} from "./Remote";
+import { Television } from "./Television";
 
 function main() {
   const TV = new Television();

@@ -1,10 +1,10 @@
-import { Remote } from "./Remote";
-import { Television } from "./Television";
 import {
+  Remote,
   ToggleCommand,
   VolumeDownCommand,
   VolumeUpCommand,
-} from "./TelevisionCommands";
+} from "./Remote";
+import { Television } from "./Television";
 
 describe("Remote functionality", () => {
   let TV: Television;

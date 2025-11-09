@@ -1,5 +1,8 @@
 import { Device } from "./Television";
-import { Command } from "./TelevisionCommands";
+
+interface Command {
+  execute(device: Device): void;
+}
 
 export class Remote {
   constructor(private readonly device: Device) {
@@ -8,5 +11,24 @@ export class Remote {
 
   execute(command: Command) {
     command.execute(this.device);
+  }
+}
+
+export class ToggleCommand implements Command {
+  execute(device: Device) {
+    device.toggle();
+  }
+}
+
+const VOLUME_STEP = 1;
+export class VolumeUpCommand implements Command {
+  execute(device: Device) {
+    device.volumeUp(VOLUME_STEP);
+  }
+}
+
+export class VolumeDownCommand implements Command {
+  execute(device: Device) {
+    device.volumeDown(VOLUME_STEP);
   }
 }
