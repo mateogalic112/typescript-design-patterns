@@ -33,7 +33,11 @@ export class Warrior {
   }
 
   private printWeapons() {
-    return Array.from(this.weapons.values()).map((weapon) => weapon.toString());
+    const weapons = [];
+    for (const weapon of this.weapons.values()) {
+      weapons.push(weapon.toString());
+    }
+    return weapons;
   }
 
   private canAttachWeapon(newWeapon: Weapon, attachmentType: AttachmentType) {
