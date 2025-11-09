@@ -60,8 +60,10 @@ export class Warrior {
     result: { attack: number; defense: number },
     weapon: Weapon
   ) => {
-    result.attack += weapon.increasePoints(this).attackPoints;
-    result.defense += weapon.increasePoints(this).defensePoints;
-    return result;
+    const { attackPoints, defensePoints } = weapon.increasePoints(this);
+    return {
+      attack: result.attack + attackPoints,
+      defense: result.defense + defensePoints,
+    };
   };
 }
