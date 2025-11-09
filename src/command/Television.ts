@@ -1,8 +1,24 @@
-export class Television {
+export interface Device {
+  getIsOn(): boolean;
+  getVolume(): number;
+  toggle(): void;
+  volumeUp(amount: number): void;
+  volumeDown(amount: number): void;
+}
+
+export class Television implements Device {
   private readonly MAX_VOLUME = 100;
   private readonly MIN_VOLUME = 0;
 
-  constructor(public isOn: boolean = false, public volume: number = 0) {}
+  constructor(private isOn: boolean = false, private volume: number = 0) {}
+
+  getIsOn() {
+    return this.isOn;
+  }
+
+  getVolume() {
+    return this.volume;
+  }
 
   toggle() {
     this.isOn = !this.isOn;

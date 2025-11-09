@@ -1,4 +1,4 @@
-import { Remote, RemoteControls } from "./Remote";
+import { Remote } from "./Remote";
 import { Television } from "./Television";
 import {
   ToggleCommand,
@@ -9,19 +9,21 @@ import {
 function main() {
   const TV = new Television();
 
-  const remote = new Remote();
-  remote.register(RemoteControls.TOGGLE, new ToggleCommand(TV));
-  remote.register(RemoteControls.VOLUME_UP, new VolumeUpCommand(TV));
-  remote.register(RemoteControls.VOLUME_DOWN, new VolumeDownCommand(TV));
+  const remote = new Remote(TV);
 
-  console.log("Television state:", TV.isOn ? "On" : "Off");
-  remote.execute(RemoteControls.TOGGLE);
-  console.log("Television state:", TV.isOn ? "On" : "Off");
+  console.log("Television state:", TV.getIsOn() ? "On" : "Off");
+  remote.execute(new ToggleCommand());
+  console.log("Television state:", TV.getIsOn() ? "On" : "Off");
 
   for (let i = 0; i < 50; ++i) {
-    remote.execute(RemoteControls.VOLUME_UP);
+    remote.execute(new VolumeUpCommand());
   }
-  console.log("Television volume:", TV.volume);
+  console.log("Television volume:", TV.getVolume());
+
+  for (let i = 0; i < 20; ++i) {
+    remote.execute(new VolumeDownCommand());
+  }
+  console.log("Television volume:", TV.getVolume());
 }
 
 main();

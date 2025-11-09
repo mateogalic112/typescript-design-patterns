@@ -1,30 +1,24 @@
-import { Television } from "./Television";
+import { Device } from "./Television";
 
 export interface Command {
-  execute(): void;
+  execute(device: Device): void;
 }
 
 export class ToggleCommand implements Command {
-  constructor(private readonly television: Television) {}
-
-  execute() {
-    this.television.toggle();
+  execute(device: Device) {
+    device.toggle();
   }
 }
 
 const VOLUME_STEP = 1;
 export class VolumeUpCommand implements Command {
-  constructor(private readonly television: Television) {}
-
-  execute() {
-    this.television.volumeUp(VOLUME_STEP);
+  execute(device: Device) {
+    device.volumeUp(VOLUME_STEP);
   }
 }
 
 export class VolumeDownCommand implements Command {
-  constructor(private readonly television: Television) {}
-
-  execute() {
-    this.television.volumeDown(VOLUME_STEP);
+  execute(device: Device) {
+    device.volumeDown(VOLUME_STEP);
   }
 }
