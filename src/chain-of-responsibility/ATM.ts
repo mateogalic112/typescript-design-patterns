@@ -24,7 +24,7 @@ export class ATM {
           this.tenDollarBill.increaseQuantity(newAmount);
           break;
         default:
-          throw new Error("Invalid Bill");
+          throw new Error(this.errors.UNSUPPORTED_BILL(bill));
       }
     });
   }
@@ -61,5 +61,6 @@ export class ATM {
     WITHDRAW_INPUT_WRONG_FORMAT: "Invalid input format",
     INSUFFICIENT_FUNDS:
       "ATM does not have enough funds to process this request",
+    UNSUPPORTED_BILL: (bill: string) => `Bill ${bill} is not supported`,
   };
 }

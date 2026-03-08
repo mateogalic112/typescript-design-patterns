@@ -15,8 +15,37 @@ describe("ATM functionality", () => {
     atm.fill(bills);
   });
 
+  describe("Fill ATM with funds", () => {
+    test("should throw when bill is not supported", () => {
+      const invalidBill = 100 as unknown as Bill;
+      try {
+        atm.fill({
+          [Bill.FIFTY]: 1,
+          [Bill.TWENTY]: 1,
+          [Bill.TEN]: 1,
+          [invalidBill]: 1,
+        });
+      } catch (e: unknown) {
+        expect((e as Error).message).toBe(atm.errors.UNSUPPORTED_BILL("100"));
+      }
+    });
+
+    test("should fill ATM with bills", () => {
+      // Clean the ATM
+      atm.withdraw(atm.getTotalAmount());
+
+      // Fill with new bills
+      atm.fill({
+        [Bill.FIFTY]: 10,
+        [Bill.TWENTY]: 0,
+        [Bill.TEN]: 2,
+      });
+      expect(atm.getTotalAmount()).toBe(520);
+    });
+  });
+
   describe("Withdraw funds", () => {
-    test("should revert if withdraw amount is greater than total ATM amount", () => {
+    test("should throw if withdraw amount is greater than total ATM amount", () => {
       const withdrawAmount = 310;
       expect(atm.getTotalAmount()).toBe(300);
 
@@ -27,7 +56,7 @@ describe("ATM functionality", () => {
       }
     });
 
-    test("should revert if withdraw amount is 0", () => {
+    test("should throw if withdraw amount is 0", () => {
       const withdrawAmount = 0;
 
       try {
@@ -37,7 +66,7 @@ describe("ATM functionality", () => {
       }
     });
 
-    test("should revert if withdraw amount is negative", () => {
+    test("should throw if withdraw amount is negative", () => {
       const withdrawAmount = -10;
 
       try {
@@ -47,7 +76,7 @@ describe("ATM functionality", () => {
       }
     });
 
-    test("Revert if withdraw amount is not multipler of 10", () => {
+    test("should throw if withdraw amount is not multipler of 10", () => {
       const withdrawAmount = 16;
       try {
         atm.withdraw(withdrawAmount);
@@ -58,7 +87,7 @@ describe("ATM functionality", () => {
       }
     });
 
-    test("Revert if amount cannot be withdrawn with current bills", () => {
+    test("should throw if amount cannot be withdrawn with current bills", () => {
       atm.withdraw(300);
       expect(atm.getTotalAmount()).toBe(0);
 
@@ -77,7 +106,7 @@ describe("ATM functionality", () => {
       }
     });
 
-    test("Successful withdrawals return proper actions", () => {
+    test("should successfully withdraw with proper actions displayed", () => {
       expect(atm.getTotalAmount()).toBe(300);
 
       const withdrawAmount = 130;
