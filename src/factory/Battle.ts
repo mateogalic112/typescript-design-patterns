@@ -9,10 +9,7 @@ export class Battle {
   ) {}
 
   start() {
-    while (
-      this.warriorOne.getHealth() > 0 &&
-      this.warriorTwo.getHealth() > 0
-    ) {
+    while (this.warriorOne.getHealth() > 0 && this.warriorTwo.getHealth() > 0) {
       if (this.attackTurn % 2 === 0) {
         this.attackOpponent(this.warriorOne, this.warriorTwo);
       } else {
@@ -24,9 +21,7 @@ export class Battle {
   private attackOpponent(attacker: Warrior, defender: Warrior) {
     const damage = attacker.attack();
     defender.receiveDamage(damage);
-    this.messages.push(
-      `${attacker.getName()} attacks with ${damage} damage.`
-    );
+    this.messages.push(`${attacker.getName()} attacks with ${damage} damage.`);
 
     if (defender.getHealth() === 0) {
       this.messages.push(

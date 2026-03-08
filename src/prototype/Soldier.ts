@@ -1,5 +1,8 @@
 export class Soldier {
-  constructor(protected speed: number, protected strength: number) {
+  constructor(
+    protected speed: number,
+    protected strength: number
+  ) {
     // Heavy operation like reading from a file, network, etc.
     this.heavyOperation();
   }

@@ -51,7 +51,10 @@ export class Warrior {
   }
 
   private calculateStats() {
-    const initialPoints = { attack: this.attack, defense: this.defense };
+    const initialPoints = {
+      attack: this.attack,
+      defense: this.defense,
+    };
 
     const intoPoints = (
       result: { attack: number; defense: number },

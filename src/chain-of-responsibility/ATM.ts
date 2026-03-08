@@ -35,7 +35,10 @@ export class ATM {
     }
 
     // process the request
-    const result = this.fiftyDollarBill.handle({ amount, actions: [] });
+    const result = this.fiftyDollarBill.handle({
+      amount,
+      actions: [],
+    });
     this.totalAmount -= amount;
 
     return result;

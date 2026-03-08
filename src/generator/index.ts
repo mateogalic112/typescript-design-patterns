@@ -11,11 +11,9 @@ function main() {
   });
 
   const weaponProcessor = new WeaponProcessor(lineReader);
-  weaponProcessor
-    .processData("src/generator/weapons.txt")
-    .then((weapons) => {
-      console.log("Weapons list:", weapons);
-    });
+  weaponProcessor.processData("src/generator/weapons.txt").then((weapons) => {
+    console.log("Weapons list:", weapons);
+  });
 }
 
 main();

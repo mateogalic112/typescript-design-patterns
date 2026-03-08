@@ -7,7 +7,10 @@ export enum Bill {
 }
 
 export class DollarBill extends AmountHandler {
-  constructor(private readonly bill: Bill, private quantity: number) {
+  constructor(
+    private readonly bill: Bill,
+    private quantity: number
+  ) {
     super();
   }
 

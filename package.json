@@ -5,7 +5,8 @@
   "main": "build/index.js",
   "scripts": {
     "test": "jest",
-    "dev": "tsc && node build/command/index.js"
+    "dev": "tsc && node build/prototype/index.js",
+    "format": "prettier . --write"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.2",
     "jest": "^29.5.0",
+    "prettier": "3.8.1",
     "ts-jest": "^29.1.0",
     "typescript": "^5.1.3"
   },

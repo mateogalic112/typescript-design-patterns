@@ -3,7 +3,9 @@ import readline from "readline";
 
 export class LineReader {
   async *readLines(filePath: string) {
-    const fileStream = fs.createReadStream(filePath, { encoding: "utf-8" });
+    const fileStream = fs.createReadStream(filePath, {
+      encoding: "utf-8",
+    });
 
     const lines = readline.createInterface({
       input: fileStream,

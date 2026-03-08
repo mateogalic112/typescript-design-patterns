@@ -11,6 +11,8 @@ export class Sniper extends Soldier {
   }
 
   clone(): this {
-    return Object.assign(super.clone(), { range: this.range });
+    return Object.assign(super.clone(), {
+      range: this.range,
+    });
   }
 }

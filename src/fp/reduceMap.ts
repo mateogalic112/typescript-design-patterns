@@ -4,8 +4,16 @@ interface Person {
   age: number;
 }
 
-const person = { firstName: "John", lastName: "Doe", age: 20 };
-const person2 = { firstName: "Ann", lastName: "Doe", age: 30 };
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 20,
+};
+const person2 = {
+  firstName: "Ann",
+  lastName: "Doe",
+  age: 30,
+};
 
 const persons = [person, person2];
 
