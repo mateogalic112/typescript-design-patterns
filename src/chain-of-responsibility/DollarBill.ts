@@ -29,8 +29,10 @@ export class DollarBill extends AmountHandler {
     const requiredBillCount = Math.floor(amount / this.bill);
     const dispenseAmount = Math.min(requiredBillCount, this.quantity);
 
-    const newAction = `Dispensing ${dispenseAmount} $${this.bill} bill`;
-    const newActions = [...actions, newAction];
+    const newActions = [
+      ...actions,
+      `Dispensing ${dispenseAmount} $${this.bill} bill`,
+    ];
 
     if (requiredBillCount > this.quantity) {
       const remainder = amount - this.quantity * this.bill;
