@@ -4,27 +4,46 @@ import { Bill } from "./DollarBill";
 describe("ATM functionality", () => {
   let atm: ATM;
 
+  const bills = {
+    [Bill.FIFTY]: 2,
+    [Bill.TWENTY]: 5,
+    [Bill.TEN]: 10,
+  };
+
   beforeEach(() => {
     atm = new ATM();
-
-    const bills = {
-      [Bill.FIFTY]: 2,
-      [Bill.TWENTY]: 5,
-      [Bill.TEN]: 10,
-    };
-
     atm.fill(bills);
   });
 
   describe("Withdraw funds", () => {
-    test("Revert if withdraw amount is greater than total ATM amount", () => {
+    test("should revert if withdraw amount is greater than total ATM amount", () => {
       const withdrawAmount = 310;
       expect(atm.getTotal()).toBe(300);
 
       try {
         atm.withdraw(withdrawAmount);
       } catch (e: unknown) {
-        expect((e as Error).message).toBe("ATM insufficient funds");
+        expect((e as Error).message).toBe(atm.errors.INSUFFICIENT_FUNDS);
+      }
+    });
+
+    test("should revert if withdraw amount is 0", () => {
+      const withdrawAmount = 0;
+
+      try {
+        atm.withdraw(withdrawAmount);
+      } catch (e: unknown) {
+        expect((e as Error).message).toBe(atm.errors.WITHDRAW_INPUT_TOO_SMALL);
+      }
+    });
+
+    test("should revert if withdraw amount is negative", () => {
+      const withdrawAmount = -10;
+
+      try {
+        atm.withdraw(withdrawAmount);
+      } catch (e: unknown) {
+        expect((e as Error).message).toBe(atm.errors.WITHDRAW_INPUT_TOO_SMALL);
       }
     });
 
@@ -33,7 +52,9 @@ describe("ATM functionality", () => {
       try {
         atm.withdraw(withdrawAmount);
       } catch (e: unknown) {
-        expect((e as Error).message).toBe("Invalid input amount");
+        expect((e as Error).message).toBe(
+          atm.errors.WITHDRAW_INPUT_WRONG_FORMAT
+        );
       }
     });
 

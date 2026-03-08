@@ -26,12 +26,16 @@ export class ATM {
   }
 
   public withdraw(amount: number) {
-    if (amount > this.totalAmount) {
-      throw new Error("ATM insufficient funds");
+    if (amount < Bill.TEN) {
+      throw new Error(this.errors.WITHDRAW_INPUT_TOO_SMALL);
     }
 
-    if (amount < Bill.TEN || amount % Bill.TEN !== 0) {
-      throw new Error("Invalid input amount");
+    if (amount % Bill.TEN !== 0) {
+      throw new Error(this.errors.WITHDRAW_INPUT_WRONG_FORMAT);
+    }
+
+    if (amount > this.totalAmount) {
+      throw new Error(this.errors.INSUFFICIENT_FUNDS);
     }
 
     // process the request
@@ -47,4 +51,11 @@ export class ATM {
   public getTotal() {
     return this.totalAmount;
   }
+
+  public errors = {
+    WITHDRAW_INPUT_TOO_SMALL: `Input amount too small, should be at least ${Bill.TEN}`,
+    WITHDRAW_INPUT_WRONG_FORMAT: "Invalid input format",
+    INSUFFICIENT_FUNDS:
+      "ATM does not have enough funds to process this request",
+  };
 }
