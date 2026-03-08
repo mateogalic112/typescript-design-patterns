@@ -4,8 +4,7 @@ export class ATM {
   constructor(
     private fiftyDollarBill = new DollarBill(Bill.FIFTY, 0),
     private twentyDollarBill = new DollarBill(Bill.TWENTY, 0),
-    private tenDollarBill = new DollarBill(Bill.TEN, 0),
-    private totalAmount = 0
+    private tenDollarBill = new DollarBill(Bill.TEN, 0)
   ) {
     this.fiftyDollarBill
       .setNext(this.twentyDollarBill)
@@ -13,15 +12,30 @@ export class ATM {
   }
 
   public fill(bills: Record<Bill, number>) {
-    this.fiftyDollarBill.setQuantity(bills[Bill.FIFTY]);
-    this.twentyDollarBill.setQuantity(bills[Bill.TWENTY]);
-    this.tenDollarBill.setQuantity(bills[Bill.TEN]);
-    this.totalAmount = this.calculateTotal(bills);
+    Object.entries(bills).forEach(([bill, newAmount]) => {
+      switch (bill) {
+        case Bill.FIFTY.toString():
+          this.fiftyDollarBill.increaseQuantity(newAmount);
+          break;
+        case Bill.TWENTY.toString():
+          this.twentyDollarBill.increaseQuantity(newAmount);
+          break;
+        case Bill.TEN.toString():
+          this.tenDollarBill.increaseQuantity(newAmount);
+          break;
+        default:
+          throw new Error("Invalid Bill");
+      }
+    });
   }
 
-  private calculateTotal(bills: Record<Bill, number>) {
-    return Object.entries(bills).reduce((total, [bill, quantity]) => {
-      return total + +bill * quantity;
+  getTotal() {
+    return [
+      this.fiftyDollarBill,
+      this.twentyDollarBill,
+      this.tenDollarBill,
+    ].reduce((total, bill) => {
+      return total + bill.getValue() * bill.getQuantity();
     }, 0);
   }
 
@@ -32,22 +46,14 @@ export class ATM {
     if (amount % Bill.TEN !== 0) {
       throw new Error(this.errors.WITHDRAW_INPUT_WRONG_FORMAT);
     }
-    if (amount > this.totalAmount) {
+    if (amount > this.getTotal()) {
       throw new Error(this.errors.INSUFFICIENT_FUNDS);
     }
 
-    // process the request
-    const result = this.fiftyDollarBill.handle({
+    return this.fiftyDollarBill.handle({
       amount,
       actions: [],
     });
-    this.totalAmount -= amount;
-
-    return result;
-  }
-
-  public getTotal() {
-    return this.totalAmount;
   }
 
   public errors = {

@@ -14,18 +14,11 @@ export class DollarBill extends AmountHandler {
     super();
   }
 
-  public setQuantity(qtyAmount: number) {
-    this.quantity = qtyAmount;
-  }
-
   handle({ amount, actions }: HandleArgs) {
     if (this.quantity === 0 || amount < this.bill) {
       return super.handle({ amount, actions });
     }
-    return this.processWithdraw({ amount, actions });
-  }
 
-  private processWithdraw({ amount, actions }: HandleArgs) {
     const requiredBillCount = Math.floor(amount / this.bill);
     const dispenseAmount = Math.min(requiredBillCount, this.quantity);
 
@@ -51,7 +44,22 @@ export class DollarBill extends AmountHandler {
         actions: newActions,
       });
     }
-
     return newActions;
+  }
+
+  setQuantity(qtyAmount: number) {
+    this.quantity = qtyAmount;
+  }
+
+  getQuantity() {
+    return this.quantity;
+  }
+
+  increaseQuantity(by: number) {
+    this.quantity = this.quantity + by;
+  }
+
+  getValue(): number {
+    return this.bill;
   }
 }
