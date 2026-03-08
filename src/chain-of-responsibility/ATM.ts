@@ -49,7 +49,6 @@ export class ATM {
     if (amount > this.getTotalAmount()) {
       throw new Error(this.errors.INSUFFICIENT_FUNDS);
     }
-
     return this.fiftyDollarBill.handle({
       amount,
       actions: [],
