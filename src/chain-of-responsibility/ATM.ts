@@ -29,11 +29,9 @@ export class ATM {
     if (amount < Bill.TEN) {
       throw new Error(this.errors.WITHDRAW_INPUT_TOO_SMALL);
     }
-
     if (amount % Bill.TEN !== 0) {
       throw new Error(this.errors.WITHDRAW_INPUT_WRONG_FORMAT);
     }
-
     if (amount > this.totalAmount) {
       throw new Error(this.errors.INSUFFICIENT_FUNDS);
     }
