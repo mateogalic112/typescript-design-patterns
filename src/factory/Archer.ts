@@ -11,13 +11,13 @@ export class Archer extends Warrior {
       health: 1000,
       weapon: new Weapon("Bow with Arrows", 100),
     });
-
     this.arrowsCount = arrowsCount;
   }
 
   attack() {
-    if (this.arrowsCount === 0) return 50;
-
+    if (this.arrowsCount === 0) {
+      return 50;
+    }
     this.arrowsCount--;
     return this.strength + this.weapon.attack();
   }

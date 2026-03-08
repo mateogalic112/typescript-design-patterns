@@ -11,13 +11,13 @@ export class Knight extends Warrior {
       health: 1000,
       weapon: new Weapon("Sword", 100),
     });
-
     this.stamina = stamina;
   }
 
   attack() {
-    if (this.stamina === 0) return 50;
-
+    if (this.stamina === 0) {
+      return 50;
+    }
     this.stamina--;
     return this.strength + this.weapon.attack();
   }

@@ -1,6 +1,6 @@
 import { Weapon } from "./Weapon";
 
-interface IWarriorBase {
+interface WarriorConstructorArgs {
   name: string;
   strength: number;
   health: number;
@@ -13,7 +13,7 @@ export abstract class Warrior {
   protected health: number;
   protected weapon: Weapon;
 
-  constructor({ name, strength, health, weapon }: IWarriorBase) {
+  constructor({ name, strength, health, weapon }: WarriorConstructorArgs) {
     this.name = name;
     this.strength = strength;
     this.health = health;
