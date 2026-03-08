@@ -11,9 +11,9 @@ function main() {
   });
 
   try {
-    console.log({ atmPreTotal: atm.getTotal() });
+    console.log({ atmPreTotal: atm.getTotalAmount() });
     console.log({ result: atm.withdraw(330) });
-    console.log({ atmPostTotal: atm.getTotal() });
+    console.log({ atmPostTotal: atm.getTotalAmount() });
   } catch (e) {
     console.log(e);
   }

@@ -11,7 +11,7 @@ export class ATM {
       .setNext(this.tenDollarBill);
   }
 
-  public fill(bills: Record<Bill, number>) {
+  fill(bills: Record<Bill, number>) {
     Object.entries(bills).forEach(([bill, newAmount]) => {
       switch (bill) {
         case Bill.FIFTY.toString():
@@ -29,7 +29,7 @@ export class ATM {
     });
   }
 
-  getTotal() {
+  getTotalAmount() {
     return [
       this.fiftyDollarBill,
       this.twentyDollarBill,
@@ -46,7 +46,7 @@ export class ATM {
     if (amount % Bill.TEN !== 0) {
       throw new Error(this.errors.WITHDRAW_INPUT_WRONG_FORMAT);
     }
-    if (amount > this.getTotal()) {
+    if (amount > this.getTotalAmount()) {
       throw new Error(this.errors.INSUFFICIENT_FUNDS);
     }
 

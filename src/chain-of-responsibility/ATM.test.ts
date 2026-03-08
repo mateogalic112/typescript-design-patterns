@@ -18,7 +18,7 @@ describe("ATM functionality", () => {
   describe("Withdraw funds", () => {
     test("should revert if withdraw amount is greater than total ATM amount", () => {
       const withdrawAmount = 310;
-      expect(atm.getTotal()).toBe(300);
+      expect(atm.getTotalAmount()).toBe(300);
 
       try {
         atm.withdraw(withdrawAmount);
@@ -60,7 +60,7 @@ describe("ATM functionality", () => {
 
     test("Revert if amount cannot be withdrawn with current bills", () => {
       atm.withdraw(300);
-      expect(atm.getTotal()).toBe(0);
+      expect(atm.getTotalAmount()).toBe(0);
 
       const bills = {
         [Bill.FIFTY]: 2,
@@ -78,7 +78,7 @@ describe("ATM functionality", () => {
     });
 
     test("Successful withdrawals return proper actions", () => {
-      expect(atm.getTotal()).toBe(300);
+      expect(atm.getTotalAmount()).toBe(300);
 
       const withdrawAmount = 130;
       const result = atm.withdraw(withdrawAmount);
@@ -99,7 +99,7 @@ describe("ATM functionality", () => {
       const result3 = atm.withdraw(withdrawAmount3);
       expect(result3).toMatchObject([`Dispensing 6 $10 bill`]);
 
-      expect(atm.getTotal()).toBe(10);
+      expect(atm.getTotalAmount()).toBe(10);
     });
   });
 });
