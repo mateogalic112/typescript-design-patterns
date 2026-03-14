@@ -3,10 +3,12 @@ import { LocalStrategy, TwitterStrategy } from "./Providers";
 
 function main() {
   const twitterLogin = new Authenticator(new TwitterStrategy());
-  twitterLogin.authenticate(["token123"]);
+  const twitterUser = twitterLogin.authenticate(["invalid_token"]); // null
+  console.log(twitterUser);
 
   const localLogin = new Authenticator(new LocalStrategy());
-  localLogin.authenticate(["matteoo.eth", "eth"]);
+  const localUser = localLogin.authenticate(["matteoo.eth", "eth"]); // { username: "matteoo.eth" }
+  console.log(localUser);
 }
 
 main();
