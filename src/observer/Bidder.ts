@@ -1,10 +1,13 @@
 import { Bid, Biddable, Observer } from "./types";
 
 export class Bidder implements Observer<Bid> {
-  constructor(private readonly name: string) {}
+  constructor(
+    private readonly name: string,
+    private readonly messages: string[] = []
+  ) {}
 
   update(bid: Bid) {
-    console.log(`${this}: Latest bid -> ${bid.bidder} - ${bid.amount}$`);
+    this.messages.push(`${this}: Latest bid -> ${bid.bidder} - ${bid.amount}$`);
     return true;
   }
 
@@ -14,5 +17,9 @@ export class Bidder implements Observer<Bid> {
 
   toString() {
     return this.name;
+  }
+
+  getMessages() {
+    return this.messages;
   }
 }
