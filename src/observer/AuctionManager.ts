@@ -1,5 +1,5 @@
 export interface Observer {
-  notify(data: Subject): void;
+  update(data: Subject): void;
 }
 
 export interface Subject {
@@ -24,7 +24,7 @@ export class AuctionManager implements Subject {
   }
 
   notify(): void {
-    this.observers.forEach((observer) => observer.notify(this));
+    this.observers.forEach((observer) => observer.update(this));
   }
 
   placeBid(amount: number, bidder: string): void {

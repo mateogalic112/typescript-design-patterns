@@ -1,9 +1,9 @@
 import { AuctionManager, Observer } from "./AuctionManager";
 
 export class Bidder implements Observer {
-  constructor(private name: string) {}
+  constructor(private readonly name: string) {}
 
-  notify(subject: AuctionManager) {
+  update(subject: AuctionManager) {
     const { bidder, amount } = subject.getLatestBid();
     console.log(`Latest bid -> ${bidder} - ${amount}$`);
   }
