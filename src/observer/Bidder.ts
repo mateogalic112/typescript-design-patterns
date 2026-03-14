@@ -1,14 +1,18 @@
-import { AuctionManager, Observer } from "./AuctionManager";
+import { AuctionManager } from "./AuctionManager";
+import { Bid, Observer } from "./types";
 
-export class Bidder implements Observer {
+export class Bidder implements Observer<Bid> {
   constructor(private readonly name: string) {}
 
-  update(subject: AuctionManager) {
-    const { bidder, amount } = subject.getLatestBid();
-    console.log(`Latest bid -> ${bidder} - ${amount}$`);
+  update(bid: Bid) {
+    console.log(`${this}: Latest bid -> ${bid.bidder} - ${bid.amount}$`);
   }
 
   placeBid(subject: AuctionManager, amount: number) {
     subject.placeBid(amount, this.name);
+  }
+
+  toString() {
+    return this.name;
   }
 }

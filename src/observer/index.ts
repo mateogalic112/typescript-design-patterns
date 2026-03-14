@@ -6,9 +6,11 @@ function main() {
 
   const bob = new Bidder("Bob");
   const alice = new Bidder("Alice");
+  const john = new Bidder("John");
 
   auctionManager.subscribe(bob);
   auctionManager.subscribe(alice);
+  auctionManager.subscribe(john);
 
   bob.placeBid(auctionManager, 100);
   alice.placeBid(auctionManager, 200);
