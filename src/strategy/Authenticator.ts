@@ -1,5 +1,9 @@
+interface User {
+  username: string;
+}
+
 export interface AuthStrategy {
-  authenticate(args: string[]): boolean;
+  authenticate(args: string[]): User | null;
 }
 
 export class Authenticator {
