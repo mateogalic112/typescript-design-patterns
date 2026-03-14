@@ -12,3 +12,7 @@ export interface Bid {
   bidder: string;
   amount: number;
 }
+
+export interface Auction {
+  placeBid(amount: number, bidder: string): void;
+}

@@ -1,6 +1,6 @@
-import { Bid, Observer, Subject } from "./types";
+import { Auction, Bid, Observer, Subject } from "./types";
 
-export class AuctionManager implements Subject<Bid> {
+export class AuctionManager implements Subject<Bid>, Auction {
   private observers: Observer<Bid>[] = [];
   private latestBid: Bid = {
     bidder: "",
