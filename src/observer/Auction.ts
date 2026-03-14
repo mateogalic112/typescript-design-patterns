@@ -31,4 +31,8 @@ export class Auction implements Subject<Bid>, Biddable {
     if (this.latestBid.amount === 0) return "No bids yet";
     return `${this.latestBid.bidder} - ${this.latestBid.amount}$`;
   }
+
+  getObserversCount(): number {
+    return this.observers.length;
+  }
 }
