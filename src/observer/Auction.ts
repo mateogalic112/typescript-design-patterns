@@ -1,6 +1,6 @@
-import { Auction, Bid, Observer, Subject } from "./types";
+import { Bid, Biddable, Observer, Subject } from "./types";
 
-export class AuctionManager implements Subject<Bid>, Auction {
+export class Auction implements Subject<Bid>, Biddable {
   private observers: Observer<Bid>[] = [];
   private latestBid: Bid = {
     bidder: "",
@@ -20,9 +20,9 @@ export class AuctionManager implements Subject<Bid>, Auction {
     this.observers.forEach((observer) => observer.update(this.latestBid));
   }
 
-  placeBid(amount: number, bidder: string): void {
-    if (amount > this.latestBid.amount) {
-      this.latestBid = { bidder, amount };
+  placeBid(bid: Bid): void {
+    if (bid.amount > this.latestBid.amount) {
+      this.latestBid = bid;
       this.notify();
     }
   }

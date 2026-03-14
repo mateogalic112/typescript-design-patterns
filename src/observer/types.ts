@@ -13,6 +13,6 @@ export interface Bid {
   amount: number;
 }
 
-export interface Auction {
-  placeBid(amount: number, bidder: string): void;
+export interface Biddable {
+  placeBid(bid: Bid): void;
 }

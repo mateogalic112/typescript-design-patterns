@@ -1,22 +1,22 @@
-import { AuctionManager } from "./AuctionManager";
+import { Auction } from "./Auction";
 import { Bidder } from "./Bidder";
 
 function main() {
-  const auctionManager = new AuctionManager();
+  const auction = new Auction();
 
   const bob = new Bidder("Bob");
   const alice = new Bidder("Alice");
   const john = new Bidder("John");
 
-  auctionManager.subscribe(bob);
-  auctionManager.subscribe(alice);
-  auctionManager.subscribe(john);
+  auction.subscribe(bob);
+  auction.subscribe(alice);
+  auction.subscribe(john);
 
-  bob.placeBid(auctionManager, 100);
-  alice.placeBid(auctionManager, 200);
+  bob.placeBid(auction, 100);
+  alice.placeBid(auction, 200);
 
-  auctionManager.unsubscribe(bob);
-  bob.placeBid(auctionManager, 300);
+  auction.unsubscribe(bob);
+  bob.placeBid(auction, 300);
 }
 
 main();
