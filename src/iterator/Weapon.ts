@@ -2,10 +2,10 @@ import { Iterator } from "./Iterator";
 import { Aggregate } from "./types";
 
 export class Weapon {
-  constructor(private weaponName: string) {}
+  constructor(private name: string) {}
 
   fire() {
-    console.log(`${this.weaponName} is firing`);
+    console.log(`${this.name} is firing`);
   }
 }
 
