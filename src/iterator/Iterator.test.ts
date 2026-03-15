@@ -28,4 +28,19 @@ describe("Iterator functionality", () => {
 
     expect(() => weapons.next()).toThrowError("At End of Iterator");
   });
+
+  test("Should allow re-iteration after reset", () => {
+    const weapons = new Iterator(arsenal);
+
+    while (weapons.hasNext()) {
+      weapons.next();
+    }
+
+    expect(weapons.hasNext()).toBeFalsy();
+
+    weapons.reset();
+
+    expect(weapons.hasNext()).toBeTruthy();
+    expect(weapons.next()).toBe(arsenal[0]);
+  });
 });

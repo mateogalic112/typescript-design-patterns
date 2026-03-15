@@ -1,9 +1,10 @@
-interface IIterator<T> {
+interface Iterable<T> {
   next(): T;
   hasNext(): boolean;
+  reset(): void;
 }
 
-export class Iterator<T> implements IIterator<T> {
+export class Iterator<T> implements Iterable<T> {
   private items: T[];
   private index: number;
 
@@ -23,5 +24,9 @@ export class Iterator<T> implements IIterator<T> {
 
   hasNext() {
     return this.index < this.items.length;
+  }
+
+  reset() {
+    this.index = 0;
   }
 }
