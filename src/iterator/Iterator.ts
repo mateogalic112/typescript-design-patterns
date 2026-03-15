@@ -7,7 +7,9 @@ export class Iterator<T> implements Iterable<T> {
   ) {}
 
   next() {
-    if (!this.hasNext()) throw new Error("At End of Iterator");
+    if (!this.hasNext()) {
+      throw new Error("At End of Iterator");
+    }
 
     const item = this.items[this.index];
     this.index += 1;
