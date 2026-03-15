@@ -5,7 +5,11 @@ export class Weapon {
   constructor(private name: string) {}
 
   fire() {
-    console.log(`${this.name} is firing`);
+    console.log(`${this} is firing`);
+  }
+
+  toString() {
+    return this.name;
   }
 }
 
