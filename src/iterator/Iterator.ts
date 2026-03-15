@@ -17,6 +17,14 @@ export class Iterator<T> implements IIterator<T> {
     return item;
   }
 
+  current() {
+    if (!this.hasNext()) {
+      throw new Error("At End of Iterator");
+    }
+
+    return this.items[this.index];
+  }
+
   hasNext() {
     return this.index < this.items.length;
   }

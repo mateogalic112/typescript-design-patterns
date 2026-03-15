@@ -5,12 +5,13 @@ describe("Iterator functionality", () => {
 
   const ak47 = new Weapon("AK-47");
   arsenal.add(ak47);
+  const m4a1 = new Weapon("M4A1");
+  arsenal.add(m4a1);
 
-  arsenal.add(new Weapon("M4A1"));
   arsenal.add(new Weapon("AWP"));
   arsenal.add(new Weapon("M249"));
 
-  test("Should loop through whole list collection", () => {
+  test("should loop through whole list collection", () => {
     const weapons = arsenal.createIterator();
 
     while (weapons.hasNext()) {
@@ -20,7 +21,7 @@ describe("Iterator functionality", () => {
     expect(weapons.hasNext()).toBeFalsy();
   });
 
-  test("Should fail if index is out of range", () => {
+  test("should fail if index is out of range", () => {
     const weapons = arsenal.createIterator();
 
     while (weapons.hasNext()) {
@@ -30,7 +31,27 @@ describe("Iterator functionality", () => {
     expect(() => weapons.next()).toThrowError("At End of Iterator");
   });
 
-  test("Should allow re-iteration after reset", () => {
+  test("should return current element without advancing", () => {
+    const weapons = arsenal.createIterator();
+
+    expect(weapons.current()).toBe(ak47);
+
+    weapons.next();
+    expect(weapons.current()).toBe(m4a1);
+    expect(weapons.hasNext()).toBeTruthy();
+  });
+
+  test("should fail current() if at end of iterator", () => {
+    const weapons = arsenal.createIterator();
+
+    while (weapons.hasNext()) {
+      weapons.next();
+    }
+
+    expect(() => weapons.current()).toThrowError("At End of Iterator");
+  });
+
+  test("should allow re-iteration after reset", () => {
     const weapons = arsenal.createIterator();
 
     while (weapons.hasNext()) {
