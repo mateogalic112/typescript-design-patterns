@@ -23,7 +23,7 @@ describe("Authenticator functionality", () => {
     const twitterLogin = new Authenticator(new TwitterStrategy());
 
     test("should fail if token do not match", () => {
-      expect(twitterLogin.authenticate(["faketoken"])).toBeFalsy();
+      expect(twitterLogin.authenticate(["faketoken"])).toBeNull();
     });
 
     test("should succeed when token is correct", () => {
