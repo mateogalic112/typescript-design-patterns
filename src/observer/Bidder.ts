@@ -8,7 +8,6 @@ export class Bidder implements Observer<Bid> {
 
   update(bid: Bid) {
     this.messages.push(`${this}: Latest bid -> ${bid.bidder} - ${bid.amount}$`);
-    return true;
   }
 
   placeBid(auction: Biddable, amount: number) {

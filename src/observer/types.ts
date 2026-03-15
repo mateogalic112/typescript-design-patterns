@@ -1,5 +1,5 @@
 export interface Observer<T> {
-  update(data: T): boolean;
+  update(data: T): void;
 }
 
 export interface Subject<T> {
