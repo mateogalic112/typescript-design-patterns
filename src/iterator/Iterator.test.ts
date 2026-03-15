@@ -1,15 +1,22 @@
 import { Arsenal, Weapon } from "./Weapon";
 
 describe("Iterator functionality", () => {
-  const arsenal = new Arsenal();
+  let arsenal: Arsenal;
+  let ak47: Weapon;
+  let m4a1: Weapon;
 
-  const ak47 = new Weapon("AK-47");
-  arsenal.add(ak47);
-  const m4a1 = new Weapon("M4A1");
-  arsenal.add(m4a1);
+  beforeEach(() => {
+    arsenal = new Arsenal();
 
-  arsenal.add(new Weapon("AWP"));
-  arsenal.add(new Weapon("M249"));
+    ak47 = new Weapon("AK-47");
+    arsenal.add(ak47);
+
+    m4a1 = new Weapon("M4A1");
+    arsenal.add(m4a1);
+
+    arsenal.add(new Weapon("AWP"));
+    arsenal.add(new Weapon("M249"));
+  });
 
   test("should loop through whole list collection", () => {
     const weapons = arsenal.createIterator();
