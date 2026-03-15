@@ -1,17 +1,10 @@
-interface Iterable<T> {
-  next(): T;
-  hasNext(): boolean;
-  reset(): void;
-}
+import { Iterable } from "./types";
 
 export class Iterator<T> implements Iterable<T> {
-  private items: T[];
-  private index: number;
-
-  constructor(items: T[]) {
-    this.index = 0;
-    this.items = items;
-  }
+  constructor(
+    private readonly items: T[] = [],
+    private index = 0
+  ) {}
 
   next() {
     if (!this.hasNext()) throw new Error("At End of Iterator");
