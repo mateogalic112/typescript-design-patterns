@@ -1,10 +1,4 @@
-interface User {
-  username: string;
-}
-
-export interface AuthStrategy {
-  authenticate(args: string[]): User | null;
-}
+import { AuthStrategy } from "./types";
 
 export class Authenticator {
   private authStrategy: AuthStrategy;
