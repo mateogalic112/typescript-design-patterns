@@ -14,6 +14,6 @@ export class Authenticator {
   }
 
   authenticate(args: string[]) {
-    return this.authStrategy.authenticate.apply(null, [args]);
+    return this.authStrategy.authenticate(args);
   }
 }
