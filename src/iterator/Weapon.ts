@@ -21,6 +21,6 @@ export class Arsenal implements Aggregate<Weapon> {
   }
 
   createIterator() {
-    return new Iterator(this.weapons);
+    return new Iterator([...this.weapons]);
   }
 }
