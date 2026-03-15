@@ -1,6 +1,6 @@
 import { type Iterator } from "./Iterator";
 
-export interface Iterable<T> {
+export interface IIterator<T> {
   next(): T;
   hasNext(): boolean;
   reset(): void;

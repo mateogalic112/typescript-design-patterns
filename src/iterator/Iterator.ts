@@ -1,6 +1,6 @@
-import { Iterable } from "./types";
+import { IIterator } from "./types";
 
-export class Iterator<T> implements Iterable<T> {
+export class Iterator<T> implements IIterator<T> {
   constructor(
     private readonly items: T[] = [],
     private index = 0
