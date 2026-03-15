@@ -3,7 +3,11 @@ import { LocalStrategy, TwitterStrategy } from "./Providers";
 
 describe("Authenticator functionality", () => {
   describe("Local login strategy", () => {
-    const localLogin = new Authenticator(new LocalStrategy());
+    let localLogin: Authenticator;
+
+    beforeEach(() => {
+      localLogin = new Authenticator(new LocalStrategy());
+    });
 
     test("should fail if username is not correct", () => {
       expect(localLogin.authenticate(["matt.eth", "eth"])).toBeNull();
@@ -20,7 +24,11 @@ describe("Authenticator functionality", () => {
   });
 
   describe("Twitter login strategy", () => {
-    const twitterLogin = new Authenticator(new TwitterStrategy());
+    let twitterLogin: Authenticator;
+
+    beforeEach(() => {
+      twitterLogin = new Authenticator(new TwitterStrategy());
+    });
 
     test("should fail if token do not match", () => {
       expect(twitterLogin.authenticate(["faketoken"])).toBeNull();
