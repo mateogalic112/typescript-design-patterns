@@ -4,8 +4,8 @@ interface IIterator<T> {
 }
 
 export class Iterator<T> implements IIterator<T> {
-  items: T[];
-  index: number;
+  private items: T[];
+  private index: number;
 
   constructor(items: T[]) {
     this.index = 0;
