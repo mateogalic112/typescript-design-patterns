@@ -18,17 +18,12 @@ export class FileProcessor {
   }
 
   private async getFileContent() {
-    try {
-      return fs.promises.readFile(this.filePath, {
-        encoding: this.encoding,
-      });
-    } catch (error) {
-      console.error(`Failed to read file ${this.filePath}: ${error}`);
-      return "";
-    }
+    return fs.promises.readFile(this.filePath, {
+      encoding: this.encoding,
+    });
   }
 
-  private intoProcessedContent(output: string, processor: Preprocessor) {
+  private intoProcessedContent = (output: string, processor: Preprocessor) => {
     return processor(output);
-  }
+  };
 }
