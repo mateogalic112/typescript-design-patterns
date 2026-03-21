@@ -1,5 +1,6 @@
 import { Preprocessor } from "./FileProcessor";
 import { FileProcessorBuilder } from "./FileProcessorBuilder";
+import path from "path";
 
 function main() {
   const toUpperCase: Preprocessor = (data: string) => data.toUpperCase();
@@ -11,7 +12,7 @@ function main() {
     data.replace(/(\S) {2,}(?=\S)/g, "$1 ");
 
   const fileProcessor = new FileProcessorBuilder()
-    .setFilePath("./src/builder/crypto.txt")
+    .setFilePath(path.join(__dirname, "crypto.txt"))
     .setEncoding("utf-8")
     .addPreprocessor(removeUppercaseWords)
     .addPreprocessor(removeExtraWhitespaces)
