@@ -4,9 +4,9 @@ export type Preprocessor = (data: string) => string;
 
 export class FileProcessor {
   constructor(
-    private filePath: string,
-    private encoding: BufferEncoding,
-    private preprocessors: Array<Preprocessor>
+    private readonly filePath: string,
+    private readonly encoding: BufferEncoding,
+    private readonly preprocessors: Array<Preprocessor>
   ) {}
 
   async process() {
