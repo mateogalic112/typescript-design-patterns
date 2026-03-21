@@ -11,14 +11,23 @@ export class FileProcessor {
 
   async process() {
     // Reads the entire contents of a file in memory
-    let fileContent = await fs.promises.readFile(this.filePath, {
-      encoding: this.encoding,
-    });
+    const fileContent = await this.readFile();
 
     // Transforms file content for each preprocessor
     return this.preprocessors.reduce(
       (output, processor) => processor(output),
       fileContent
     );
+  }
+
+  private async readFile() {
+    try {
+      return fs.promises.readFile(this.filePath, {
+        encoding: this.encoding,
+      });
+    } catch (error) {
+      console.error(`Failed to read file ${this.filePath}: ${error}`);
+      return "";
+    }
   }
 }
