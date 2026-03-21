@@ -21,9 +21,13 @@ export class FileProcessorBuilder {
   }
 
   build() {
+    this.validateBuild();
+    return new FileProcessor(this.filePath, this.encoding, this.preprocessors);
+  }
+
+  private validateBuild() {
     if (!this.filePath) {
       throw new Error("File path is required");
     }
-    return new FileProcessor(this.filePath, this.encoding, this.preprocessors);
   }
 }
