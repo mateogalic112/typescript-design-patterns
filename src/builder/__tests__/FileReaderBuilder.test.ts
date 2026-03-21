@@ -34,23 +34,20 @@ describe("File Processor Builder functionality", () => {
       expect(fileProcessor).toBeInstanceOf(FileProcessor);
     });
 
-    test("Should return FileProcessor instance with proper fields set", () => {
-      const filePath = "/some-path";
-      const encoding: BufferEncoding = "base64";
+    test("Should return FileProcessor that applies configured preprocessors", async () => {
+      const filePath = "./src/builder/__tests__/test-file.txt";
 
       const fileProcessor = fileProcessorBuilder
         .setFilePath(filePath)
-        .setEncoding(encoding)
-        .addPreprocessor(toUpperCase)
+        .setEncoding(TEXT_ENCODING)
         .addPreprocessor(removeUppercaseWords)
+        .addPreprocessor(toUpperCase)
         .build();
 
+      const result = await fileProcessor.process();
+
       expect(fileProcessor).toBeInstanceOf(FileProcessor);
-      expect(fileProcessor).toMatchObject({
-        filePath,
-        encoding,
-        preprocessors: [toUpperCase, removeUppercaseWords],
-      });
+      expect(result).toBe("AM JUST A DUMMY FILE!");
     });
   });
 });
