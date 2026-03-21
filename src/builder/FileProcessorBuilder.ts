@@ -1,7 +1,7 @@
 import { FileProcessor, Preprocessor } from "./FileProcessor";
 
 export class FileProcessorBuilder {
-  private filePath = "";
+  private filePath: string = "";
   private encoding: BufferEncoding = "utf-8";
   private preprocessors: Preprocessor[] = [];
 
@@ -21,8 +21,9 @@ export class FileProcessorBuilder {
   }
 
   build() {
-    if (!this.filePath) throw new Error("File path is required");
-
+    if (!this.filePath) {
+      throw new Error("File path is required");
+    }
     return new FileProcessor(this.filePath, this.encoding, this.preprocessors);
   }
 }
