@@ -10,10 +10,7 @@ export class FileProcessor {
   ) {}
 
   async process() {
-    // Reads the entire contents of a file in memory
     const rawContent = await this.getFileContent();
-
-    // Transforms file content for each preprocessor
     return this.preprocessors.reduce(this.intoProcessedContent, rawContent);
   }
 
