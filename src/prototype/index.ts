@@ -12,7 +12,7 @@ function main() {
 
   // Executing heavy operation...
   // Attacking 50
-  // 0 (out of range)
+  // Out of range
   // Attacking 50
 }
 

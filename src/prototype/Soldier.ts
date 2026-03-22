@@ -1,9 +1,20 @@
 import { Prototype } from "./Prototype";
 
+type InitOperation = () => void;
+
 interface SoldierConstructorArgs {
   name: string;
   speed: number;
   strength: number;
+  init?: InitOperation;
+}
+
+function heavyInit() {
+  console.log("Executing heavy operation...");
+  for (let i = 0; i < 100_000_000; i++) {
+    let x = Math.random() * 100;
+    x += 1;
+  }
 }
 
 export class Soldier implements Prototype<Soldier> {
@@ -11,12 +22,11 @@ export class Soldier implements Prototype<Soldier> {
   private readonly speed: number;
   private readonly strength: number;
 
-  constructor({ name, speed, strength }: SoldierConstructorArgs) {
+  constructor({ name, speed, strength, init = heavyInit }: SoldierConstructorArgs) {
     this.name = name;
     this.speed = speed;
     this.strength = strength;
-    // Heavy operation like reading from a file, network, etc.
-    this.heavyOperation();
+    init();
   }
 
   clone(): this {
@@ -30,14 +40,6 @@ export class Soldier implements Prototype<Soldier> {
     const power = this.strength * this.speed;
     console.log("Attacking " + power);
     return power;
-  }
-
-  heavyOperation() {
-    console.log("Executing heavy operation...");
-    for (let i = 0; i < 100_000_000; i++) {
-      let x = Math.random() * 100;
-      x += 1;
-    }
   }
 
   toString() {

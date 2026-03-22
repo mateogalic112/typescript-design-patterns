@@ -4,13 +4,14 @@ interface ConstructorArgs {
   speed: number;
   strength: number;
   range: number;
+  init?: () => void;
 }
 
 export class Sniper extends Soldier {
   private readonly range: number;
 
-  constructor({ speed, strength, range }: ConstructorArgs) {
-    super({ name: "Sniper", speed, strength });
+  constructor({ speed, strength, range, init }: ConstructorArgs) {
+    super({ name: "Sniper", speed, strength, init });
     this.range = range;
   }
 
