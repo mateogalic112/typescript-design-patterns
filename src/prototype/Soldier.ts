@@ -20,8 +20,10 @@ export class Soldier implements Prototype<Soldier> {
   }
 
   clone(): this {
-    // Shallow copy
-    return Object.assign(Object.create(Object.getPrototypeOf(this)), this);
+    // Deep copy while preserving the prototype chain
+    const cloned = structuredClone(this);
+    Object.setPrototypeOf(cloned, Object.getPrototypeOf(this));
+    return cloned;
   }
 
   attack() {
