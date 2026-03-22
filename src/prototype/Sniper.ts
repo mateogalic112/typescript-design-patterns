@@ -1,12 +1,16 @@
 import { Soldier } from "./Soldier";
 
+interface ConstructorArgs {
+  speed: number;
+  strength: number;
+  range: number;
+}
+
 export class Sniper extends Soldier {
-  constructor(
-    protected speed: number,
-    protected strength: number,
-    protected range: number
-  ) {
-    super(speed, strength);
+  private readonly range: number;
+
+  constructor({ speed, strength, range }: ConstructorArgs) {
+    super({ name: "Sniper", speed, strength });
     this.range = range;
   }
 

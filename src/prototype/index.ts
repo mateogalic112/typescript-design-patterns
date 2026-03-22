@@ -1,7 +1,7 @@
 import { Sniper } from "./Sniper";
 
 function main() {
-  const baseSniper = new Sniper(5, 10, 250);
+  const baseSniper = new Sniper({ speed: 5, strength: 10, range: 250 });
   const sniperClone = baseSniper.clone();
   const sniperClone2 = baseSniper.clone();
   const sniperClone3 = baseSniper.clone();

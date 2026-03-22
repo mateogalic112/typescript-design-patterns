@@ -1,8 +1,20 @@
-export class Soldier {
-  constructor(
-    protected speed: number,
-    protected strength: number
-  ) {
+import { Prototype } from "./Prototype";
+
+interface SoldierConstructorArgs {
+  name: string;
+  speed: number;
+  strength: number;
+}
+
+export class Soldier implements Prototype<Soldier> {
+  private readonly name: string;
+  private readonly speed: number;
+  private readonly strength: number;
+
+  constructor({ name, speed, strength }: SoldierConstructorArgs) {
+    this.name = name;
+    this.speed = speed;
+    this.strength = strength;
     // Heavy operation like reading from a file, network, etc.
     this.heavyOperation();
   }
@@ -24,5 +36,9 @@ export class Soldier {
       let x = Math.random() * 100;
       x += 1;
     }
+  }
+
+  toString() {
+    return this.name;
   }
 }
