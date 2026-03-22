@@ -22,7 +22,12 @@ export class Soldier implements Prototype<Soldier> {
   private readonly speed: number;
   private readonly strength: number;
 
-  constructor({ name, speed, strength, init = heavyInit }: SoldierConstructorArgs) {
+  constructor({
+    name,
+    speed,
+    strength,
+    init = heavyInit,
+  }: SoldierConstructorArgs) {
     this.name = name;
     this.speed = speed;
     this.strength = strength;
