@@ -1,8 +1,18 @@
 import { Soldier } from "../Soldier";
 import { Sniper } from "../Sniper";
-import { createSniper } from "../test-utils";
 
 describe("Prototype pattern", () => {
+  let sniper: Sniper;
+
+  beforeEach(() => {
+    sniper = new Sniper({
+      speed: 5,
+      strength: 10,
+      range: 250,
+      init: () => {},
+    });
+  });
+
   test("clone should not call init", () => {
     const init = jest.fn();
     const base = new Sniper({ speed: 5, strength: 10, range: 250, init });
@@ -14,22 +24,21 @@ describe("Prototype pattern", () => {
   });
 
   test("clone should preserve the prototype chain", () => {
-    const clone = createSniper().clone();
+    const clone = sniper.clone();
 
     expect(clone).toBeInstanceOf(Sniper);
     expect(clone).toBeInstanceOf(Soldier);
   });
 
   test("clone should be independent from the original", () => {
-    const base = createSniper();
-    const clone = base.clone();
+    const clone = sniper.clone();
 
-    expect(clone).not.toBe(base);
-    expect(clone.attack()).toBe(base.attack());
+    expect(clone).not.toBe(sniper);
+    expect(clone.attack()).toBe(sniper.attack());
   });
 
   test("clone should copy all properties", () => {
-    const clone = createSniper().clone();
+    const clone = sniper.clone();
 
     expect(clone.toString()).toBe("Sniper");
     expect(clone.attack()).toBe(50);
