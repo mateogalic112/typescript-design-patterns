@@ -14,9 +14,11 @@ export class Sniper extends Soldier {
     this.range = range;
   }
 
-  clone(): this {
-    return Object.assign(super.clone(), {
-      range: this.range,
-    });
+  attack(distanceToTarget: number = 0) {
+    if (distanceToTarget > this.range) {
+      console.log("Out of range");
+      return 0;
+    }
+    return super.attack();
   }
 }
