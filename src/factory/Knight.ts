@@ -18,4 +18,8 @@ export class Knight extends Warrior {
     this.stamina--;
     return this.strength + this.weapon.attack();
   }
+
+  getStamina() {
+    return this.stamina;
+  }
 }

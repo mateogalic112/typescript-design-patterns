@@ -19,4 +19,8 @@ export class Archer extends Warrior {
     this.arrowsCount--;
     return this.strength + this.weapon.attack();
   }
+
+  getArrowsCount() {
+    return this.arrowsCount;
+  }
 }

@@ -3,8 +3,8 @@ import { Knight } from "./Knight";
 import { Warrior } from "./Warrior";
 
 export enum WarriorType {
-  ARCHER,
-  KNIGHT,
+  ARCHER = "Archer",
+  KNIGHT = "Knight",
 }
 
 export class WarriorFactory {
