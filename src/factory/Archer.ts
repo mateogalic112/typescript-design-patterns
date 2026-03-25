@@ -2,9 +2,7 @@ import { Warrior } from "./Warrior";
 import { Weapon } from "./Weapon";
 
 export class Archer extends Warrior {
-  private arrowsCount: number;
-
-  constructor(arrowsCount: number) {
+  constructor(private arrowsCount: number) {
     super({
       name: "Archer",
       strength: 100,

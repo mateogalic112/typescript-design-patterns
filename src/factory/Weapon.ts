@@ -4,11 +4,11 @@ export class Weapon {
     private damage: number
   ) {}
 
-  getInfo() {
-    return `${this.name} with damage ${this.damage}`;
-  }
-
   attack() {
     return this.damage;
+  }
+
+  toString() {
+    return `${this.name} with damage ${this.damage}`;
   }
 }
