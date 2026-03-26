@@ -1,4 +1,4 @@
-import { Warrior } from "./Warrior";
+import { Warrior, WarriorType } from "./Warrior";
 
 export enum AttachmentType {
   LEFT_HAND,
@@ -7,11 +7,13 @@ export enum AttachmentType {
   HEAD,
 }
 
-export abstract class Weapon {
+export class Weapon {
   constructor(
+    private readonly name: string,
     protected readonly attackPoints: number,
     protected readonly defensePoints: number,
-    protected readonly attachmentTypes: Array<AttachmentType>
+    protected readonly attachmentTypes: Array<AttachmentType>,
+    protected readonly warriorBonus: Map<WarriorType, number>
   ) {}
 
   getAttachmentTypes() {
@@ -19,16 +21,14 @@ export abstract class Weapon {
   }
 
   increasePoints(warrior: Warrior) {
+    const bonusPoints = this.warriorBonus.get(warrior.getWarriorType()) ?? 0;
     return {
-      attackPoints:
-        this.attackPoints + this.getWarriorPoints(warrior).attackPoints,
-      defensePoints:
-        this.defensePoints + this.getWarriorPoints(warrior).defensePoints,
+      attackPoints: this.attackPoints + bonusPoints,
+      defensePoints: this.defensePoints + bonusPoints,
     };
   }
 
-  abstract getWarriorPoints(warrior: Warrior): {
-    attackPoints: number;
-    defensePoints: number;
-  };
+  toString() {
+    return `${this.name} has damage ${this.attackPoints} and defense ${this.defensePoints}`;
+  }
 }

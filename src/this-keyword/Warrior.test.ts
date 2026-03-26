@@ -1,21 +1,37 @@
 import { Warrior, WarriorType } from "./Warrior";
-import { WarriorFactory } from "./WarriorFactory";
-import { AttachmentType } from "./Weapon";
-import { WeaponFactory, WeaponType } from "./WeaponFactory";
+import { AttachmentType, Weapon } from "./Weapon";
 
 describe("Warrior functionality", () => {
   let spartanWarrior: Warrior;
 
-  const sword = WeaponFactory.createWeapon(WeaponType.SWORD);
-  const axe = WeaponFactory.createWeapon(WeaponType.AXE);
-  const helmet = WeaponFactory.createWeapon(WeaponType.HELMET);
+  const sword = new Weapon(
+    "sword",
+    100,
+    100,
+    [AttachmentType.LEFT_HAND, AttachmentType.RIGHT_HAND],
+    new Map([[WarriorType.SPARTAN, 100]])
+  );
+  const axe = new Weapon(
+    "axe",
+    200,
+    50,
+    [AttachmentType.RIGHT_HAND, AttachmentType.LEFT_HAND],
+    new Map([[WarriorType.SPARTAN, 200]])
+  );
+  const helmet = new Weapon(
+    "helmet",
+    20,
+    200,
+    [AttachmentType.HEAD],
+    new Map()
+  );
 
   beforeEach(() => {
-    spartanWarrior = WarriorFactory.createWarrior(WarriorType.SPARTAN);
+    spartanWarrior = new Warrior(WarriorType.SPARTAN, 100, 100);
   });
 
   describe("Attach weapon to warrior", () => {
-    test("Should fail when equiping weapon with same type", () => {
+    test("should fail when equiping weapon with same type", () => {
       try {
         spartanWarrior
           .attachWeapon(sword, AttachmentType.LEFT_HAND)
@@ -38,7 +54,7 @@ describe("Warrior functionality", () => {
 
   describe("Get warrior info", () => {
     test("Should return base info before adding weapons", () => {
-      expect(spartanWarrior.getWarriorInfo()).toMatchObject({
+      expect(spartanWarrior.getWarriorPoints()).toMatchObject({
         attack: 100,
         defense: 100,
       });
@@ -50,9 +66,9 @@ describe("Warrior functionality", () => {
         .attachWeapon(sword, AttachmentType.LEFT_HAND)
         .attachWeapon(helmet, AttachmentType.HEAD);
 
-      expect(spartanWarrior.getWarriorInfo()).toMatchObject({
-        attack: 100 + 180 + 60,
-        defense: 100 + 18 + 150,
+      expect(spartanWarrior.getWarriorPoints()).toMatchObject({
+        attack: 100 + 200 + 20,
+        defense: 100 + 200 + 200,
       });
       expect(spartanWarrior.getWeapons()).toEqual(
         new Map([

@@ -8,21 +8,11 @@ export enum WarriorType {
 
 export class Warrior {
   constructor(
+    private warriorType: WarriorType,
     private attack: number,
     private defense: number,
     private weapons: Map<AttachmentType, Weapon> = new Map()
   ) {}
-
-  getWarriorInfo() {
-    return {
-      ...this.calculateStats(),
-      weapons: this.printWeapons(),
-    };
-  }
-
-  getWeapons() {
-    return this.weapons;
-  }
 
   attachWeapon(newWeapon: Weapon, attachmentType: AttachmentType) {
     if (!this.canAttachWeapon(newWeapon, attachmentType)) {
@@ -32,12 +22,12 @@ export class Warrior {
     return this;
   }
 
-  private printWeapons() {
-    const weapons = [];
-    for (const weapon of this.weapons.values()) {
-      weapons.push(weapon.toString());
-    }
-    return weapons;
+  getWarriorType() {
+    return this.warriorType;
+  }
+
+  getWeapons() {
+    return this.weapons;
   }
 
   private canAttachWeapon(newWeapon: Weapon, attachmentType: AttachmentType) {
@@ -50,16 +40,13 @@ export class Warrior {
     return true;
   }
 
-  private calculateStats() {
+  public getWarriorPoints() {
     const initialPoints = {
       attack: this.attack,
       defense: this.defense,
     };
 
-    const intoPoints = (
-      result: { attack: number; defense: number },
-      weapon: Weapon
-    ) => {
+    const intoPoints = (result: typeof initialPoints, weapon: Weapon) => {
       const { attackPoints, defensePoints } = weapon.increasePoints(this);
       result.attack += attackPoints;
       result.defense += defensePoints;
