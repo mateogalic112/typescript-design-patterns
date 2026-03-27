@@ -15,6 +15,7 @@ function main() {
     200,
     [AttachmentType.HEAD],
     new Map()
+  );
 
   const spartan = new Warrior(WarriorType.SPARTAN, 100, 100);
   const roman = new Warrior(WarriorType.ROMAN, 100, 100);
