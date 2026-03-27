@@ -7,15 +7,9 @@ function main() {
     100,
     100,
     [AttachmentType.LEFT_HAND, AttachmentType.RIGHT_HAND],
-    new Map([[WarriorType.SPARTAN, 100]])
+    new Map([[WarriorType.SPARTAN, 101]])
   );
-  const axe = new Weapon(
-    "axe",
-    200,
-    50,
-    [AttachmentType.RIGHT_HAND, AttachmentType.LEFT_HAND],
-    new Map([[WarriorType.SPARTAN, 200]])
-  );
+
   const helmet = new Weapon(
     "helmet",
     20,
@@ -30,11 +24,9 @@ function main() {
 
   roman
     .attachWeapon(sword, AttachmentType.LEFT_HAND)
-    .attachWeapon(axe, AttachmentType.RIGHT_HAND)
     .attachWeapon(helmet, AttachmentType.HEAD);
 
   spartan.attachWeapon(sword, AttachmentType.LEFT_HAND);
-
   persian.attachWeapon(sword, AttachmentType.LEFT_HAND);
 
   console.log({ roman: roman.getWarriorPoints() });
