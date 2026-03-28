@@ -3,17 +3,19 @@ interface Thug {
   age: number;
 }
 
-const thug = { name: "John", age: 20 };
-const thug2 = { name: "Ann", age: 30 };
-const thugs = [thug, thug2];
+const thug_one = { name: "John", age: 20 };
+const thug_two = { name: "Ann", age: 30 };
 
-const allowedToClub = (t: Thug) => t.age >= 21;
+const thugs = [thug_one, thug_two];
+
+// business logic function
+const allowed = (t: Thug) => t.age >= 21;
 
 // Using standard `filter` function on array
-const thugsAllowed = thugs.filter(allowedToClub);
+const tugsAllowed = thugs.filter(allowed);
 
 const filterByReduce = <T>(items: T[], fn: (item: T) => boolean) =>
-  items.reduce((acc, item) => (fn(item) ? acc.concat(item) : acc), [] as T[]);
+  items.reduce<T[]>((acc, item) => (fn(item) ? acc.concat(item) : acc), []);
 
 // Using `reduce` function to implement `filter` function
-console.log(filterByReduce(thugs, allowedToClub)); // [ { name: "Ann", age: 30 } ]
+console.log(filterByReduce(thugs, allowed)); // [ { name: "Ann", age: 30 } ]
