@@ -3,6 +3,10 @@ import readline from "readline";
 
 export class LineReader {
   async *readLines(filePath: string) {
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`File not found: ${filePath}`);
+    }
+
     const fileStream = fs.createReadStream(filePath, {
       encoding: "utf-8",
     });
@@ -12,8 +16,12 @@ export class LineReader {
       crlfDelay: Infinity,
     });
 
-    for await (const line of lines) {
-      yield line;
+    try {
+      for await (const line of lines) {
+        yield line;
+      }
+    } finally {
+      fileStream.destroy();
     }
   }
 }
