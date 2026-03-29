@@ -1,6 +1,6 @@
 import { LineProcessor } from "./LineProcessor";
 
-type Weapon = {
+export type Weapon = {
   weapon: string;
   damage: number;
 };

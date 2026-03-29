@@ -1,7 +1,7 @@
 import path from "path";
 import { LineReader } from "./LineReader";
-import { CityProcessor } from "./processors/CityProcessor";
-import { WeaponProcessor } from "./processors/WeaponProcessor";
+import { City, CityProcessor } from "./processors/CityProcessor";
+import { Weapon, WeaponProcessor } from "./processors/WeaponProcessor";
 
 const DATA_DIR = path.resolve(__dirname, "data");
 const CITIES_FILE = path.resolve(DATA_DIR, "cities.txt");
@@ -48,7 +48,7 @@ describe("CityProcessor", () => {
   });
 
   test("should process all cities from file", async () => {
-    const cities = [];
+    const cities: City[] = [];
 
     for await (const city of processor.processData(CITIES_FILE)) {
       cities.push(city);
@@ -83,7 +83,7 @@ describe("WeaponProcessor", () => {
   });
 
   test("should process all weapons from file", async () => {
-    const weapons = [];
+    const weapons: Weapon[] = [];
 
     for await (const weapon of processor.processData(WEAPONS_FILE)) {
       weapons.push(weapon);

@@ -1,6 +1,6 @@
 import { LineProcessor } from "./LineProcessor";
 
-type City = {
+export type City = {
   name: string;
   population: number;
 };
