@@ -7,9 +7,7 @@ export class LineReader {
       throw new Error(`File not found: ${filePath}`);
     }
 
-    const fileStream = fs.createReadStream(filePath, {
-      encoding: "utf-8",
-    });
+    const fileStream = fs.createReadStream(filePath);
 
     const lines = readline.createInterface({
       input: fileStream,
