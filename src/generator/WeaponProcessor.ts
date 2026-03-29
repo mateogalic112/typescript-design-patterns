@@ -1,27 +1,26 @@
 import { LineProcessor } from "./LineProcessor";
 
-type Weapon = {
+export type Weapon = {
   weapon: string;
   damage: number;
 };
 
-export class WeaponProcessor extends LineProcessor<Weapon[]> {
-  toWeapon(line: string): Weapon {
-    const [weapon, damage] = line.split(" - ");
-
+export class WeaponProcessor extends LineProcessor<Weapon> {
+  transform(line: string): Weapon {
+    const [weapon, rawDamage] = line.split(" - ");
     return {
       weapon,
-      damage: parseInt(damage.replace(" damage", ""), 10),
+      damage: this.parseDamage(rawDamage),
     };
   }
 
-  async processData(filePath: string) {
-    const weapons: Weapon[] = [];
-
-    for await (const line of this.lineReader.readLines(filePath)) {
-      weapons.push(this.toWeapon(line));
+  private parseDamage(raw: string): number {
+    const parsed = parseInt(raw.replace(" damage", ""), 10);
+    if (Number.isNaN(parsed)) {
+      throw new Error(
+        `Invalid damage format, expected number, received: ${raw}`
+      );
     }
-
-    return weapons;
+    return parsed;
   }
 }

@@ -5,23 +5,22 @@ type City = {
   population: number;
 };
 
-export class CityProcessor extends LineProcessor<City[]> {
-  toCity(line: string): City {
-    const [name, population] = line.split(" - ");
-
+export class CityProcessor extends LineProcessor<City> {
+  transform(line: string): City {
+    const [name, rawPopulation] = line.split(" - ");
     return {
       name,
-      population: parseInt(population.replace(/,/g, ""), 10),
+      population: this.parsePopulation(rawPopulation),
     };
   }
 
-  async processData(filePath: string) {
-    const cities: City[] = [];
-
-    for await (const line of this.lineReader.readLines(filePath)) {
-      cities.push(this.toCity(line));
+  private parsePopulation(raw: string): number {
+    const parsed = parseInt(raw.replace(/,/g, ""), 10);
+    if (Number.isNaN(parsed)) {
+      throw new Error(
+        `Invalid population format, expected number, received: ${raw}`
+      );
     }
-
-    return cities;
+    return parsed;
   }
 }
