@@ -6,7 +6,7 @@ type City = {
 };
 
 export class CityProcessor extends LineProcessor<City> {
-  transform(line: string): City {
+  transform(line: string) {
     const [name, rawPopulation] = line.split(" - ");
     return {
       name,

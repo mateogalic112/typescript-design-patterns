@@ -1,12 +1,12 @@
 import { LineProcessor } from "./LineProcessor";
 
-export type Weapon = {
+type Weapon = {
   weapon: string;
   damage: number;
 };
 
 export class WeaponProcessor extends LineProcessor<Weapon> {
-  transform(line: string): Weapon {
+  transform(line: string) {
     const [weapon, rawDamage] = line.split(" - ");
     return {
       weapon,

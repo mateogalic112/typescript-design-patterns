@@ -5,13 +5,9 @@ export abstract class LineProcessor<T> {
 
   abstract transform(line: string): T;
 
-  async processData(filePath: string): Promise<T[]> {
-    const results: T[] = [];
-
+  async *processData(filePath: string): AsyncGenerator<T> {
     for await (const line of this.lineReader.readLines(filePath)) {
-      results.push(this.transform(line));
+      yield this.transform(line);
     }
-
-    return results;
   }
 }
