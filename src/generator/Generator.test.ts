@@ -1,9 +1,11 @@
+import path from "path";
 import { LineReader } from "./LineReader";
-import { CityProcessor } from "./CityProcessor";
-import { WeaponProcessor } from "./WeaponProcessor";
+import { CityProcessor } from "./processors/CityProcessor";
+import { WeaponProcessor } from "./processors/WeaponProcessor";
 
-const CITIES_FILE = "src/generator/cities.txt";
-const WEAPONS_FILE = "src/generator/weapons.txt";
+const DATA_DIR = path.resolve(__dirname, "data");
+const CITIES_FILE = path.resolve(DATA_DIR, "cities.txt");
+const WEAPONS_FILE = path.resolve(DATA_DIR, "weapons.txt");
 
 describe("LineReader", () => {
   let lineReader: LineReader;
