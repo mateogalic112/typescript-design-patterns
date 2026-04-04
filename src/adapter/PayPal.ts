@@ -7,10 +7,21 @@ export class PayPal {
 }
 
 export class PayPalAdapter implements PaymentProcessor {
+  private transactionId = 0;
+
   constructor(private readonly paypal: PayPal) {}
 
-  pay(amount: number): void {
+  pay(amount: number) {
     // PayPal already uses dollars
     this.paypal.sendPayment(amount);
+    return this.generateTransaction();
+  }
+
+  private generateTransaction() {
+    this.transactionId++;
+    return {
+      transactionId: `paypal:${this.transactionId}`,
+      success: true,
+    };
   }
 }
