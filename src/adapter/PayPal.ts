@@ -1,12 +1,12 @@
 import { PaymentProcessor } from "./PaymentProcessor";
 
-class PayPal {
+export class PayPal {
   sendPayment(amount: number): void {
     console.log(`Paypal sent ${amount}`);
   }
 }
 
-class PayPalAdapter implements PaymentProcessor {
+export class PayPalAdapter implements PaymentProcessor {
   constructor(private readonly paypal: PayPal) {}
 
   pay(amount: number): void {
@@ -14,5 +14,3 @@ class PayPalAdapter implements PaymentProcessor {
     this.paypal.sendPayment(amount);
   }
 }
-
-export const paypalAdapter = new PayPalAdapter(new PayPal());
