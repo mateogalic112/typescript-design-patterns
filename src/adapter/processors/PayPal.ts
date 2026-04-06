@@ -1,4 +1,4 @@
-import { PaymentProcessor } from "./PaymentProcessor";
+import { PaymentProcessor } from "../PaymentProcessor";
 
 export class PayPal {
   sendPayment(amount: number): void {

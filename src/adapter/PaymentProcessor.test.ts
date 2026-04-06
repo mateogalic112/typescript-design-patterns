@@ -1,6 +1,6 @@
 import { PaymentProcessor } from "./PaymentProcessor";
-import { StripeAdapter, Stripe } from "./Stripe";
-import { PayPalAdapter, PayPal } from "./PayPal";
+import { StripeAdapter, Stripe } from "./processors/Stripe";
+import { PayPalAdapter, PayPal } from "./processors/PayPal";
 
 describe("PaymentProcessor functionality", () => {
   describe("Stripe processor", () => {

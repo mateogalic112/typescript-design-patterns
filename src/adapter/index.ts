@@ -1,6 +1,6 @@
-import { PayPal, PayPalAdapter } from "./PayPal";
+import { PayPal, PayPalAdapter } from "./processors/PayPal";
 import { PaymentProcessor } from "./PaymentProcessor";
-import { Stripe, StripeAdapter } from "./Stripe";
+import { Stripe, StripeAdapter } from "./processors/Stripe";
 
 function checkout(processor: PaymentProcessor) {
   processor.pay(100);
